@@ -5,20 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "cwd": "${workspaceRoot}",
-            "executable": "build/STM32F767_ADC_DMA.elf",
             "name": "Debug with OpenOCD",
-            "device": "STM32F767ZITx",
+            "cwd": "${workspaceRoot}",
+            "executable": "./build/STM32F767_ADC_DMA.elf",
             "request": "launch",
             "type": "cortex-debug",
             "servertype": "openocd",
             "configFiles": [
-                "interface/stlink.cfg",
-                "target/stm32f7.cfg"
+                "/usr/share/openocd/scripts/interface/stlink.cfg",
+                "/usr/share/openocd/scripts/target/stm32f7x.cfg"
             ],
             "searchDir": [],
             "runToEntryPoint": "main",
-            "showDevDebugOutput": "none"
-        }
+            "showDevDebugOutput": "raw"
+        }  
     ]
 }
