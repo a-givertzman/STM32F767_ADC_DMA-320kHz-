@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "STM32F7",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "USE_HAL_DRIVER",
+                "STM32F767xx"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "compilerArgs": [
+                "-mfpu=fpv5-d16",
+                "-mthumb"
+            ],
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-clang-x64"
+        }
+    ],
+    "version": 4
+}
