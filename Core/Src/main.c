@@ -43,7 +43,7 @@ enum {
 	UDP_BUF_HALF_LEN = ADC_BUF_LEN,
 	UDP_BUF_LEN = ADC_BUF_LEN * 2
 };
-uint8_t udp_buf[UDP_BUF_LEN];
+// uint8_t udp_buf[UDP_BUF_LEN];
 uint16_t adc_buf[ADC_BUF_LEN];
 //float adcVoltage[ADC_BUF_LEN];
 struct udp_pcb *upcb;
@@ -84,7 +84,7 @@ static void udpClient_send1(void) {
 //	  adc_buf[i] = i;
 //  }
 //  int len = sprintf(adc_buf, "sending UDP client message %d\n", counter);
-	int len = UDP_BUF_HALF_LEN;
+	int len = UDP_BUF_LEN;
 	txBuf = pbuf_alloc(PBUF_TRANSPORT, len, PBUF_RAM);
 	if (txBuf != NULL) {
     // memcpy(txBuf->payload, &adc_buf, len);
@@ -124,30 +124,30 @@ static void udpClient_send2(void) {
 }
 ///
 ///
+void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
+	// __NOP();
+	// return;
+	if (hadc->Instance == ADC1) {
+	  udpClient_send1();
+	// 	for (uint8_t i = 0; i < ADC_BUF_LEN / 2; i++) {
+	// 		adcVoltage[i] = adc_buf[i] * 3.3 / 4095;
+	// 	}
+	}
+}
+///
+///
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 //	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7); //LED_BLUE
 // __NOP();
-//	if (hadc->Instance == ADC1) {
+	if (hadc->Instance == ADC1) {
+	  // udpClient_send2();
 //		for (uint16_t i = 0; i < ADC_BUF_LEN; i++) {
 ////			adcVoltage[i] = adc_buf[i]; // * 0.000805664;
 //			adcVoltage[i] = adc_buf[i] * 3.3 / 4095;
 //		}
-//	}
-	udpClient_send2();
+	}
 //	counter++;
 //	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7); //LED_BLUE
-}
-///
-///
-void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
-	udpClient_send1();
-	// __NOP();
-	// return;
-	// if (hadc->Instance == ADC1) {
-	// 	for (uint8_t i = 0; i < ADC_BUF_LEN / 2; i++) {
-	// 		adcVoltage[i] = adc_buf[i] * 3.3 / 4095;
-	// 	}
-	// }
 }
 ///
 ///
