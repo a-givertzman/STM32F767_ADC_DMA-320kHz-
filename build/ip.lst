@@ -1,0 +1,52 @@
+ARM GAS  /tmp/cc6hiVkW.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-d16
+   4              		.eabi_attribute 28, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"ip.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.global	ip_data
+  19              		.section	.bss.ip_data,"aw",%nobits
+  20              		.align	2
+  23              	ip_data:
+  24 0000 00000000 		.space	24
+  24      00000000 
+  24      00000000 
+  24      00000000 
+  24      00000000 
+  25              		.text
+  26              	.Letext0:
+  27              		.file 1 "/home/lobanov/st/stm32cubeclt_1.12.1/GNU-tools-for-STM32/arm-none-eabi/include/machine/_d
+  28              		.file 2 "/home/lobanov/st/stm32cubeclt_1.12.1/GNU-tools-for-STM32/arm-none-eabi/include/sys/_stdin
+  29              		.file 3 "Middlewares/Third_Party/LwIP/src/include/lwip/arch.h"
+  30              		.file 4 "Middlewares/Third_Party/LwIP/src/include/lwip/ip4_addr.h"
+  31              		.file 5 "Middlewares/Third_Party/LwIP/src/include/lwip/ip_addr.h"
+  32              		.file 6 "Middlewares/Third_Party/LwIP/src/include/lwip/err.h"
+  33              		.file 7 "Middlewares/Third_Party/LwIP/src/include/lwip/pbuf.h"
+  34              		.file 8 "Middlewares/Third_Party/LwIP/src/include/lwip/netif.h"
+  35              		.file 9 "Middlewares/Third_Party/LwIP/src/include/lwip/prot/ip4.h"
+  36              		.file 10 "Middlewares/Third_Party/LwIP/src/include/lwip/ip.h"
+  37              		.file 11 "Middlewares/Third_Party/LwIP/src/include/lwip/memp.h"
+  38              		.file 12 "Middlewares/Third_Party/LwIP/src/core/ip.c"
+ARM GAS  /tmp/cc6hiVkW.s 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ip.c
+     /tmp/cc6hiVkW.s:23     .bss.ip_data:0000000000000000 ip_data
+     /tmp/cc6hiVkW.s:20     .bss.ip_data:0000000000000000 $d
+
+NO UNDEFINED SYMBOLS
