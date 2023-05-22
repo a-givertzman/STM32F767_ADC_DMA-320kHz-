@@ -128,6 +128,8 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 ///
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	if (htim->Instance == TIM1) {
+	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
+
 		// HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0); //LED_GREEN
 	  HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7); //LED_BLUE
 //		__NOP();
