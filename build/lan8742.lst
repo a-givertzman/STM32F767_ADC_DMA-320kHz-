@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cciUJ1cW.s 			page 1
+ARM GAS  /tmp/ccNmYzfW.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
   28:Drivers/BSP/Components/lan8742/lan8742.c **** /** @addtogroup Component
   29:Drivers/BSP/Components/lan8742/lan8742.c ****   * @{
   30:Drivers/BSP/Components/lan8742/lan8742.c ****   */ 
-ARM GAS  /tmp/cciUJ1cW.s 			page 2
+ARM GAS  /tmp/ccNmYzfW.s 			page 2
 
 
   31:Drivers/BSP/Components/lan8742/lan8742.c ****   
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
   48 000c A2B1     		cbz	r2, .L6
   66:Drivers/BSP/Components/lan8742/lan8742.c ****   {
   67:Drivers/BSP/Components/lan8742/lan8742.c ****     return LAN8742_STATUS_ERROR;
-ARM GAS  /tmp/cciUJ1cW.s 			page 3
+ARM GAS  /tmp/ccNmYzfW.s 			page 3
 
 
   68:Drivers/BSP/Components/lan8742/lan8742.c ****   }
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
   91              	.LVL5:
   67:Drivers/BSP/Components/lan8742/lan8742.c ****   }
   92              		.loc 1 67 12 view .LVU30
-ARM GAS  /tmp/cciUJ1cW.s 			page 4
+ARM GAS  /tmp/ccNmYzfW.s 			page 4
 
 
   93 0030 7047     		bx	lr
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  133 0002 82B0     		sub	sp, sp, #8
  134              	.LCFI1:
  135              		.cfi_def_cfa_offset 24
-ARM GAS  /tmp/cciUJ1cW.s 			page 5
+ARM GAS  /tmp/ccNmYzfW.s 			page 5
 
 
  136 0004 0546     		mov	r5, r0
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  109:Drivers/BSP/Components/lan8742/lan8742.c ****          status = LAN8742_STATUS_READ_ERROR;
  170              		.loc 1 109 17 view .LVU52
  171 001e 6FF00406 		mvn	r6, #4
-ARM GAS  /tmp/cciUJ1cW.s 			page 6
+ARM GAS  /tmp/ccNmYzfW.s 			page 6
 
 
  172              	.LVL15:
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  118:Drivers/BSP/Components/lan8742/lan8742.c ****          status = LAN8742_STATUS_OK;
  208              		.loc 1 118 17 is_stmt 0 view .LVU68
  209 0042 0026     		movs	r6, #0
-ARM GAS  /tmp/cciUJ1cW.s 			page 7
+ARM GAS  /tmp/ccNmYzfW.s 			page 7
 
 
  210              	.LVL19:
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  246 0068 AB69     		ldr	r3, [r5, #24]
  247              		.loc 1 137 24 view .LVU84
  248 006a 9847     		blx	r3
-ARM GAS  /tmp/cciUJ1cW.s 			page 8
+ARM GAS  /tmp/ccNmYzfW.s 			page 8
 
 
  249              	.LVL22:
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  148:Drivers/BSP/Components/lan8742/lan8742.c ****                }
  149:Drivers/BSP/Components/lan8742/lan8742.c ****              }
  150:Drivers/BSP/Components/lan8742/lan8742.c ****              else
-ARM GAS  /tmp/cciUJ1cW.s 			page 9
+ARM GAS  /tmp/ccNmYzfW.s 			page 9
 
 
  151:Drivers/BSP/Components/lan8742/lan8742.c ****              {
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  175:Drivers/BSP/Components/lan8742/lan8742.c ****      {
  176:Drivers/BSP/Components/lan8742/lan8742.c ****      }
  319              		.loc 1 176 6 discriminator 1 view .LVU108
-ARM GAS  /tmp/cciUJ1cW.s 			page 10
+ARM GAS  /tmp/ccNmYzfW.s 			page 10
 
 
  174:Drivers/BSP/Components/lan8742/lan8742.c ****      {
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  180:Drivers/BSP/Components/lan8742/lan8742.c ****  }
  360              		.loc 1 180 11 is_stmt 0 view .LVU121
  361 00cc F6E7     		b	.L7
-ARM GAS  /tmp/cciUJ1cW.s 			page 11
+ARM GAS  /tmp/ccNmYzfW.s 			page 11
 
 
  362              		.cfi_endproc
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  195:Drivers/BSP/Components/lan8742/lan8742.c ****       {
  196:Drivers/BSP/Components/lan8742/lan8742.c ****         return LAN8742_STATUS_ERROR;
  197:Drivers/BSP/Components/lan8742/lan8742.c ****       }
-ARM GAS  /tmp/cciUJ1cW.s 			page 12
+ARM GAS  /tmp/ccNmYzfW.s 			page 12
 
 
  198:Drivers/BSP/Components/lan8742/lan8742.c ****     }
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  212:Drivers/BSP/Components/lan8742/lan8742.c ****   */
  213:Drivers/BSP/Components/lan8742/lan8742.c **** int32_t LAN8742_DisablePowerDownMode(lan8742_Object_t *pObj)
  214:Drivers/BSP/Components/lan8742/lan8742.c **** {
-ARM GAS  /tmp/cciUJ1cW.s 			page 13
+ARM GAS  /tmp/ccNmYzfW.s 			page 13
 
 
  444              		.loc 1 214 1 is_stmt 1 view -0
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  489              	.LVL50:
  490              		.loc 1 223 7 view .LVU154
  491 0026 0028     		cmp	r0, #0
-ARM GAS  /tmp/cciUJ1cW.s 			page 14
+ARM GAS  /tmp/ccNmYzfW.s 			page 14
 
 
  492 0028 05DB     		blt	.L39
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  236:Drivers/BSP/Components/lan8742/lan8742.c **** /**
  237:Drivers/BSP/Components/lan8742/lan8742.c ****   * @brief  Enable the LAN8742 power down mode.
  238:Drivers/BSP/Components/lan8742/lan8742.c ****   * @param  pObj: device object LAN8742_Object_t.  
-ARM GAS  /tmp/cciUJ1cW.s 			page 15
+ARM GAS  /tmp/ccNmYzfW.s 			page 15
 
 
  239:Drivers/BSP/Components/lan8742/lan8742.c ****   * @retval LAN8742_STATUS_OK  if OK
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  570              		.loc 1 253 16 is_stmt 0 view .LVU174
  571 001e 2369     		ldr	r3, [r4, #16]
  572              		.loc 1 253 8 view .LVU175
-ARM GAS  /tmp/cciUJ1cW.s 			page 16
+ARM GAS  /tmp/ccNmYzfW.s 			page 16
 
 
  573 0020 0021     		movs	r1, #0
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  612              		.thumb
  613              		.thumb_func
  615              	LAN8742_StartAutoNego:
-ARM GAS  /tmp/cciUJ1cW.s 			page 17
+ARM GAS  /tmp/ccNmYzfW.s 			page 17
 
 
  616              	.LVL62:
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  654 0018 42F48052 		orr	r2, r2, #4096
  655 001c 0192     		str	r2, [sp, #4]
  281:Drivers/BSP/Components/lan8742/lan8742.c ****   
-ARM GAS  /tmp/cciUJ1cW.s 			page 18
+ARM GAS  /tmp/ccNmYzfW.s 			page 18
 
 
  282:Drivers/BSP/Components/lan8742/lan8742.c ****     /* Apply configuration */
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  692              		.cfi_endproc
  693              	.LFE5:
  695              		.section	.text.LAN8742_GetLinkState,"ax",%progbits
-ARM GAS  /tmp/cciUJ1cW.s 			page 19
+ARM GAS  /tmp/ccNmYzfW.s 			page 19
 
 
  696              		.align	1
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  731              		.loc 1 314 6 view .LVU212
  732 0012 9847     		blx	r3
  733              	.LVL72:
-ARM GAS  /tmp/cciUJ1cW.s 			page 20
+ARM GAS  /tmp/ccNmYzfW.s 			page 20
 
 
  734              		.loc 1 314 5 view .LVU213
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  337:Drivers/BSP/Components/lan8742/lan8742.c ****   if((readval & LAN8742_BCR_AUTONEGO_EN) != LAN8742_BCR_AUTONEGO_EN)
  766              		.loc 1 337 3 is_stmt 1 view .LVU224
  767              		.loc 1 337 15 is_stmt 0 view .LVU225
-ARM GAS  /tmp/cciUJ1cW.s 			page 21
+ARM GAS  /tmp/ccNmYzfW.s 			page 21
 
 
  768 003c 019B     		ldr	r3, [sp, #4]
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  801 006a 21DB     		blt	.L61
  359:Drivers/BSP/Components/lan8742/lan8742.c ****     {
  360:Drivers/BSP/Components/lan8742/lan8742.c ****       return LAN8742_STATUS_READ_ERROR;
-ARM GAS  /tmp/cciUJ1cW.s 			page 22
+ARM GAS  /tmp/ccNmYzfW.s 			page 22
 
 
  361:Drivers/BSP/Components/lan8742/lan8742.c ****     }
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  831 008c 6FF00400 		mvn	r0, #4
  832 0090 03E0     		b	.L51
  833              	.L55:
-ARM GAS  /tmp/cciUJ1cW.s 			page 23
+ARM GAS  /tmp/ccNmYzfW.s 			page 23
 
 
  322:Drivers/BSP/Components/lan8742/lan8742.c ****   }
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  876              		.loc 1 371 14 view .LVU261
  877 00ba 0220     		movs	r0, #2
  878 00bc EDE7     		b	.L51
-ARM GAS  /tmp/cciUJ1cW.s 			page 24
+ARM GAS  /tmp/ccNmYzfW.s 			page 24
 
 
  879              	.L64:
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  917 000a 0191     		str	r1, [sp, #4]
  404:Drivers/BSP/Components/lan8742/lan8742.c ****   int32_t status = LAN8742_STATUS_OK;
  918              		.loc 1 404 3 is_stmt 1 view .LVU268
-ARM GAS  /tmp/cciUJ1cW.s 			page 25
+ARM GAS  /tmp/ccNmYzfW.s 			page 25
 
 
  919              	.LVL79:
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  424:Drivers/BSP/Components/lan8742/lan8742.c ****     {
  425:Drivers/BSP/Components/lan8742/lan8742.c ****       /* Wrong link status parameter */
  426:Drivers/BSP/Components/lan8742/lan8742.c ****       status = LAN8742_STATUS_ERROR;
-ARM GAS  /tmp/cciUJ1cW.s 			page 26
+ARM GAS  /tmp/ccNmYzfW.s 			page 26
 
 
  427:Drivers/BSP/Components/lan8742/lan8742.c ****     }	
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  987 004c F1E7     		b	.L71
  988              	.L78:
  417:Drivers/BSP/Components/lan8742/lan8742.c ****     }
-ARM GAS  /tmp/cciUJ1cW.s 			page 27
+ARM GAS  /tmp/ccNmYzfW.s 			page 27
 
 
  989              		.loc 1 417 7 view .LVU293
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  1028 0000 10B5     		push	{r4, lr}
  1029              	.LCFI27:
  1030              		.cfi_def_cfa_offset 8
-ARM GAS  /tmp/cciUJ1cW.s 			page 28
+ARM GAS  /tmp/ccNmYzfW.s 			page 28
 
 
  1031              		.cfi_offset 4, -8
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  1075              	.L79:
  464:Drivers/BSP/Components/lan8742/lan8742.c ****     {
  465:Drivers/BSP/Components/lan8742/lan8742.c ****       status = LAN8742_STATUS_WRITE_ERROR;
-ARM GAS  /tmp/cciUJ1cW.s 			page 29
+ARM GAS  /tmp/ccNmYzfW.s 			page 29
 
 
  466:Drivers/BSP/Components/lan8742/lan8742.c ****     }
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  484:Drivers/BSP/Components/lan8742/lan8742.c **** {
  1110              		.loc 1 484 1 is_stmt 1 view -0
  1111              		.cfi_startproc
-ARM GAS  /tmp/cciUJ1cW.s 			page 30
+ARM GAS  /tmp/ccNmYzfW.s 			page 30
 
 
  1112              		@ args = 0, pretend = 0, frame = 8
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  1157 0026 0028     		cmp	r0, #0
  1158 0028 05DB     		blt	.L87
  486:Drivers/BSP/Components/lan8742/lan8742.c ****   
-ARM GAS  /tmp/cciUJ1cW.s 			page 31
+ARM GAS  /tmp/ccNmYzfW.s 			page 31
 
 
  1159              		.loc 1 486 11 view .LVU339
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  508:Drivers/BSP/Components/lan8742/lan8742.c ****   * @param  pObj: Pointer to device object. 
  509:Drivers/BSP/Components/lan8742/lan8742.c ****   * @param  Interrupt: IT source to be enabled
  510:Drivers/BSP/Components/lan8742/lan8742.c ****   *         should be a value or a combination of the following:
-ARM GAS  /tmp/cciUJ1cW.s 			page 32
+ARM GAS  /tmp/ccNmYzfW.s 			page 32
 
 
  511:Drivers/BSP/Components/lan8742/lan8742.c ****   *         LAN8742_WOL_IT                     
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  1233 0016 0028     		cmp	r0, #0
  1234 0018 0BDB     		blt	.L91
  529:Drivers/BSP/Components/lan8742/lan8742.c ****   {
-ARM GAS  /tmp/cciUJ1cW.s 			page 33
+ARM GAS  /tmp/ccNmYzfW.s 			page 33
 
 
  530:Drivers/BSP/Components/lan8742/lan8742.c ****     readval |= Interrupt;
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  1271 0038 6FF00300 		mvn	r0, #3
  1272              	.LVL110:
  543:Drivers/BSP/Components/lan8742/lan8742.c **** }
-ARM GAS  /tmp/cciUJ1cW.s 			page 34
+ARM GAS  /tmp/ccNmYzfW.s 			page 34
 
 
  1273              		.loc 1 543 3 is_stmt 1 view .LVU366
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  1307 0008 0023     		movs	r3, #0
  1308 000a 0193     		str	r3, [sp, #4]
  566:Drivers/BSP/Components/lan8742/lan8742.c ****   int32_t status = LAN8742_STATUS_OK;
-ARM GAS  /tmp/cciUJ1cW.s 			page 35
+ARM GAS  /tmp/ccNmYzfW.s 			page 35
 
 
  1309              		.loc 1 566 3 is_stmt 1 view .LVU372
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  582:Drivers/BSP/Components/lan8742/lan8742.c ****    
  583:Drivers/BSP/Components/lan8742/lan8742.c ****   return status;
  584:Drivers/BSP/Components/lan8742/lan8742.c **** }
-ARM GAS  /tmp/cciUJ1cW.s 			page 36
+ARM GAS  /tmp/ccNmYzfW.s 			page 36
 
 
  1347              		.loc 1 584 1 view .LVU386
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  603:Drivers/BSP/Components/lan8742/lan8742.c **** {
  1381              		.loc 1 603 1 is_stmt 1 view -0
  1382              		.cfi_startproc
-ARM GAS  /tmp/cciUJ1cW.s 			page 37
+ARM GAS  /tmp/ccNmYzfW.s 			page 37
 
 
  1383              		@ args = 0, pretend = 0, frame = 8
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  1426              	.LVL126:
  1427              	.L101:
  1428              	.LCFI46:
-ARM GAS  /tmp/cciUJ1cW.s 			page 38
+ARM GAS  /tmp/ccNmYzfW.s 			page 38
 
 
  1429              		.cfi_restore_state
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  1462 0004 0C46     		mov	r4, r1
  634:Drivers/BSP/Components/lan8742/lan8742.c ****   uint32_t readval = 0;
  1463              		.loc 1 634 3 is_stmt 1 view .LVU409
-ARM GAS  /tmp/cciUJ1cW.s 			page 39
+ARM GAS  /tmp/ccNmYzfW.s 			page 39
 
 
  1464              		.loc 1 634 12 is_stmt 0 view .LVU410
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  643:Drivers/BSP/Components/lan8742/lan8742.c ****   }
  1505              		.loc 1 643 12 view .LVU421
  1506 0028 6FF00400 		mvn	r0, #4
-ARM GAS  /tmp/cciUJ1cW.s 			page 40
+ARM GAS  /tmp/ccNmYzfW.s 			page 40
 
 
  1507              	.LVL135:
@@ -2354,38 +2354,38 @@ ARM GAS  /tmp/cciUJ1cW.s 			page 1
  1516              		.file 2 "/home/lobanov/st/stm32cubeclt_1.12.1/GNU-tools-for-STM32/arm-none-eabi/include/machine/_d
  1517              		.file 3 "/home/lobanov/st/stm32cubeclt_1.12.1/GNU-tools-for-STM32/arm-none-eabi/include/sys/_stdin
  1518              		.file 4 "Drivers/BSP/Components/lan8742/lan8742.h"
-ARM GAS  /tmp/cciUJ1cW.s 			page 41
+ARM GAS  /tmp/ccNmYzfW.s 			page 41
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 lan8742.c
-     /tmp/cciUJ1cW.s:19     .text.LAN8742_RegisterBusIO:0000000000000000 $t
-     /tmp/cciUJ1cW.s:25     .text.LAN8742_RegisterBusIO:0000000000000000 LAN8742_RegisterBusIO
-     /tmp/cciUJ1cW.s:112    .text.LAN8742_Init:0000000000000000 $t
-     /tmp/cciUJ1cW.s:118    .text.LAN8742_Init:0000000000000000 LAN8742_Init
-     /tmp/cciUJ1cW.s:366    .text.LAN8742_DeInit:0000000000000000 $t
-     /tmp/cciUJ1cW.s:372    .text.LAN8742_DeInit:0000000000000000 LAN8742_DeInit
-     /tmp/cciUJ1cW.s:435    .text.LAN8742_DisablePowerDownMode:0000000000000000 $t
-     /tmp/cciUJ1cW.s:441    .text.LAN8742_DisablePowerDownMode:0000000000000000 LAN8742_DisablePowerDownMode
-     /tmp/cciUJ1cW.s:522    .text.LAN8742_EnablePowerDownMode:0000000000000000 $t
-     /tmp/cciUJ1cW.s:528    .text.LAN8742_EnablePowerDownMode:0000000000000000 LAN8742_EnablePowerDownMode
-     /tmp/cciUJ1cW.s:609    .text.LAN8742_StartAutoNego:0000000000000000 $t
-     /tmp/cciUJ1cW.s:615    .text.LAN8742_StartAutoNego:0000000000000000 LAN8742_StartAutoNego
-     /tmp/cciUJ1cW.s:696    .text.LAN8742_GetLinkState:0000000000000000 $t
-     /tmp/cciUJ1cW.s:702    .text.LAN8742_GetLinkState:0000000000000000 LAN8742_GetLinkState
-     /tmp/cciUJ1cW.s:887    .text.LAN8742_SetLinkState:0000000000000000 $t
-     /tmp/cciUJ1cW.s:893    .text.LAN8742_SetLinkState:0000000000000000 LAN8742_SetLinkState
-     /tmp/cciUJ1cW.s:1014   .text.LAN8742_EnableLoopbackMode:0000000000000000 $t
-     /tmp/cciUJ1cW.s:1020   .text.LAN8742_EnableLoopbackMode:0000000000000000 LAN8742_EnableLoopbackMode
-     /tmp/cciUJ1cW.s:1101   .text.LAN8742_DisableLoopbackMode:0000000000000000 $t
-     /tmp/cciUJ1cW.s:1107   .text.LAN8742_DisableLoopbackMode:0000000000000000 LAN8742_DisableLoopbackMode
-     /tmp/cciUJ1cW.s:1188   .text.LAN8742_EnableIT:0000000000000000 $t
-     /tmp/cciUJ1cW.s:1194   .text.LAN8742_EnableIT:0000000000000000 LAN8742_EnableIT
-     /tmp/cciUJ1cW.s:1280   .text.LAN8742_DisableIT:0000000000000000 $t
-     /tmp/cciUJ1cW.s:1286   .text.LAN8742_DisableIT:0000000000000000 LAN8742_DisableIT
-     /tmp/cciUJ1cW.s:1372   .text.LAN8742_ClearIT:0000000000000000 $t
-     /tmp/cciUJ1cW.s:1378   .text.LAN8742_ClearIT:0000000000000000 LAN8742_ClearIT
-     /tmp/cciUJ1cW.s:1440   .text.LAN8742_GetITStatus:0000000000000000 $t
-     /tmp/cciUJ1cW.s:1446   .text.LAN8742_GetITStatus:0000000000000000 LAN8742_GetITStatus
+     /tmp/ccNmYzfW.s:19     .text.LAN8742_RegisterBusIO:0000000000000000 $t
+     /tmp/ccNmYzfW.s:25     .text.LAN8742_RegisterBusIO:0000000000000000 LAN8742_RegisterBusIO
+     /tmp/ccNmYzfW.s:112    .text.LAN8742_Init:0000000000000000 $t
+     /tmp/ccNmYzfW.s:118    .text.LAN8742_Init:0000000000000000 LAN8742_Init
+     /tmp/ccNmYzfW.s:366    .text.LAN8742_DeInit:0000000000000000 $t
+     /tmp/ccNmYzfW.s:372    .text.LAN8742_DeInit:0000000000000000 LAN8742_DeInit
+     /tmp/ccNmYzfW.s:435    .text.LAN8742_DisablePowerDownMode:0000000000000000 $t
+     /tmp/ccNmYzfW.s:441    .text.LAN8742_DisablePowerDownMode:0000000000000000 LAN8742_DisablePowerDownMode
+     /tmp/ccNmYzfW.s:522    .text.LAN8742_EnablePowerDownMode:0000000000000000 $t
+     /tmp/ccNmYzfW.s:528    .text.LAN8742_EnablePowerDownMode:0000000000000000 LAN8742_EnablePowerDownMode
+     /tmp/ccNmYzfW.s:609    .text.LAN8742_StartAutoNego:0000000000000000 $t
+     /tmp/ccNmYzfW.s:615    .text.LAN8742_StartAutoNego:0000000000000000 LAN8742_StartAutoNego
+     /tmp/ccNmYzfW.s:696    .text.LAN8742_GetLinkState:0000000000000000 $t
+     /tmp/ccNmYzfW.s:702    .text.LAN8742_GetLinkState:0000000000000000 LAN8742_GetLinkState
+     /tmp/ccNmYzfW.s:887    .text.LAN8742_SetLinkState:0000000000000000 $t
+     /tmp/ccNmYzfW.s:893    .text.LAN8742_SetLinkState:0000000000000000 LAN8742_SetLinkState
+     /tmp/ccNmYzfW.s:1014   .text.LAN8742_EnableLoopbackMode:0000000000000000 $t
+     /tmp/ccNmYzfW.s:1020   .text.LAN8742_EnableLoopbackMode:0000000000000000 LAN8742_EnableLoopbackMode
+     /tmp/ccNmYzfW.s:1101   .text.LAN8742_DisableLoopbackMode:0000000000000000 $t
+     /tmp/ccNmYzfW.s:1107   .text.LAN8742_DisableLoopbackMode:0000000000000000 LAN8742_DisableLoopbackMode
+     /tmp/ccNmYzfW.s:1188   .text.LAN8742_EnableIT:0000000000000000 $t
+     /tmp/ccNmYzfW.s:1194   .text.LAN8742_EnableIT:0000000000000000 LAN8742_EnableIT
+     /tmp/ccNmYzfW.s:1280   .text.LAN8742_DisableIT:0000000000000000 $t
+     /tmp/ccNmYzfW.s:1286   .text.LAN8742_DisableIT:0000000000000000 LAN8742_DisableIT
+     /tmp/ccNmYzfW.s:1372   .text.LAN8742_ClearIT:0000000000000000 $t
+     /tmp/ccNmYzfW.s:1378   .text.LAN8742_ClearIT:0000000000000000 LAN8742_ClearIT
+     /tmp/ccNmYzfW.s:1440   .text.LAN8742_GetITStatus:0000000000000000 $t
+     /tmp/ccNmYzfW.s:1446   .text.LAN8742_GetITStatus:0000000000000000 LAN8742_GetITStatus
 
 NO UNDEFINED SYMBOLS

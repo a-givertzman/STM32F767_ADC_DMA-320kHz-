@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccDtWxTB.s 			page 1
+ARM GAS  /tmp/ccfcWQDF.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccDtWxTB.s 			page 1
   29:Core/Src/tim.c **** /* TIM1 init function */
   30:Core/Src/tim.c **** void MX_TIM1_Init(void)
   31:Core/Src/tim.c **** {
-ARM GAS  /tmp/ccDtWxTB.s 			page 2
+ARM GAS  /tmp/ccfcWQDF.s 			page 2
 
 
   28              		.loc 1 31 1 view -0
@@ -98,8 +98,8 @@ ARM GAS  /tmp/ccDtWxTB.s 			page 1
   43:Core/Src/tim.c ****   htim1.Instance = TIM1;
   51              		.loc 1 43 3 is_stmt 1 view .LVU5
   52              		.loc 1 43 18 is_stmt 0 view .LVU6
-  53 0014 1648     		ldr	r0, .L9
-  54 0016 174A     		ldr	r2, .L9+4
+  53 0014 1548     		ldr	r0, .L9
+  54 0016 164A     		ldr	r2, .L9+4
   55 0018 0260     		str	r2, [r0]
   44:Core/Src/tim.c ****   htim1.Init.Prescaler = 108 - 1;
   56              		.loc 1 44 3 is_stmt 1 view .LVU7
@@ -110,33 +110,33 @@ ARM GAS  /tmp/ccDtWxTB.s 			page 1
   60              		.loc 1 45 3 is_stmt 1 view .LVU9
   61              		.loc 1 45 26 is_stmt 0 view .LVU10
   62 001e 8360     		str	r3, [r0, #8]
-  46:Core/Src/tim.c ****   htim1.Init.Period = 1000 - 1;
+  46:Core/Src/tim.c ****   htim1.Init.Period = 100 - 1;
   63              		.loc 1 46 3 is_stmt 1 view .LVU11
   64              		.loc 1 46 21 is_stmt 0 view .LVU12
-  65 0020 40F2E732 		movw	r2, #999
-  66 0024 C260     		str	r2, [r0, #12]
+  65 0020 6322     		movs	r2, #99
+  66 0022 C260     		str	r2, [r0, #12]
   47:Core/Src/tim.c ****   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   67              		.loc 1 47 3 is_stmt 1 view .LVU13
   68              		.loc 1 47 28 is_stmt 0 view .LVU14
-ARM GAS  /tmp/ccDtWxTB.s 			page 3
+ARM GAS  /tmp/ccfcWQDF.s 			page 3
 
 
-  69 0026 0361     		str	r3, [r0, #16]
+  69 0024 0361     		str	r3, [r0, #16]
   48:Core/Src/tim.c ****   htim1.Init.RepetitionCounter = 0;
   70              		.loc 1 48 3 is_stmt 1 view .LVU15
   71              		.loc 1 48 32 is_stmt 0 view .LVU16
-  72 0028 4361     		str	r3, [r0, #20]
+  72 0026 4361     		str	r3, [r0, #20]
   49:Core/Src/tim.c ****   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   73              		.loc 1 49 3 is_stmt 1 view .LVU17
   74              		.loc 1 49 32 is_stmt 0 view .LVU18
-  75 002a 8361     		str	r3, [r0, #24]
+  75 0028 8361     		str	r3, [r0, #24]
   50:Core/Src/tim.c ****   if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
   76              		.loc 1 50 3 is_stmt 1 view .LVU19
   77              		.loc 1 50 7 is_stmt 0 view .LVU20
-  78 002c FFF7FEFF 		bl	HAL_TIM_Base_Init
+  78 002a FFF7FEFF 		bl	HAL_TIM_Base_Init
   79              	.LVL0:
   80              		.loc 1 50 6 view .LVU21
-  81 0030 A0B9     		cbnz	r0, .L6
+  81 002e A0B9     		cbnz	r0, .L6
   82              	.L2:
   51:Core/Src/tim.c ****   {
   52:Core/Src/tim.c ****     Error_Handler();
@@ -144,17 +144,17 @@ ARM GAS  /tmp/ccDtWxTB.s 			page 1
   54:Core/Src/tim.c ****   sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
   83              		.loc 1 54 3 is_stmt 1 view .LVU22
   84              		.loc 1 54 34 is_stmt 0 view .LVU23
-  85 0032 4FF48053 		mov	r3, #4096
-  86 0036 0493     		str	r3, [sp, #16]
+  85 0030 4FF48053 		mov	r3, #4096
+  86 0034 0493     		str	r3, [sp, #16]
   55:Core/Src/tim.c ****   if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK)
   87              		.loc 1 55 3 is_stmt 1 view .LVU24
   88              		.loc 1 55 7 is_stmt 0 view .LVU25
-  89 0038 04A9     		add	r1, sp, #16
-  90 003a 0D48     		ldr	r0, .L9
-  91 003c FFF7FEFF 		bl	HAL_TIM_ConfigClockSource
+  89 0036 04A9     		add	r1, sp, #16
+  90 0038 0C48     		ldr	r0, .L9
+  91 003a FFF7FEFF 		bl	HAL_TIM_ConfigClockSource
   92              	.LVL1:
   93              		.loc 1 55 6 view .LVU26
-  94 0040 78B9     		cbnz	r0, .L7
+  94 003e 78B9     		cbnz	r0, .L7
   95              	.L3:
   56:Core/Src/tim.c ****   {
   57:Core/Src/tim.c ****     Error_Handler();
@@ -162,29 +162,29 @@ ARM GAS  /tmp/ccDtWxTB.s 			page 1
   59:Core/Src/tim.c ****   sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
   96              		.loc 1 59 3 is_stmt 1 view .LVU27
   97              		.loc 1 59 37 is_stmt 0 view .LVU28
-  98 0042 2023     		movs	r3, #32
-  99 0044 0193     		str	r3, [sp, #4]
+  98 0040 2023     		movs	r3, #32
+  99 0042 0193     		str	r3, [sp, #4]
   60:Core/Src/tim.c ****   sMasterConfig.MasterOutputTrigger2 = TIM_TRGO2_RESET;
  100              		.loc 1 60 3 is_stmt 1 view .LVU29
  101              		.loc 1 60 38 is_stmt 0 view .LVU30
- 102 0046 0023     		movs	r3, #0
- 103 0048 0293     		str	r3, [sp, #8]
+ 102 0044 0023     		movs	r3, #0
+ 103 0046 0293     		str	r3, [sp, #8]
   61:Core/Src/tim.c ****   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
  104              		.loc 1 61 3 is_stmt 1 view .LVU31
  105              		.loc 1 61 33 is_stmt 0 view .LVU32
- 106 004a 0393     		str	r3, [sp, #12]
+ 106 0048 0393     		str	r3, [sp, #12]
   62:Core/Src/tim.c ****   if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
  107              		.loc 1 62 3 is_stmt 1 view .LVU33
  108              		.loc 1 62 7 is_stmt 0 view .LVU34
- 109 004c 01A9     		add	r1, sp, #4
- 110 004e 0848     		ldr	r0, .L9
-ARM GAS  /tmp/ccDtWxTB.s 			page 4
+ 109 004a 01A9     		add	r1, sp, #4
+ 110 004c 0748     		ldr	r0, .L9
+ARM GAS  /tmp/ccfcWQDF.s 			page 4
 
 
- 111 0050 FFF7FEFF 		bl	HAL_TIMEx_MasterConfigSynchronization
+ 111 004e FFF7FEFF 		bl	HAL_TIMEx_MasterConfigSynchronization
  112              	.LVL2:
  113              		.loc 1 62 6 view .LVU35
- 114 0054 40B9     		cbnz	r0, .L8
+ 114 0052 40B9     		cbnz	r0, .L8
  115              	.L1:
   63:Core/Src/tim.c ****   {
   64:Core/Src/tim.c ****     Error_Handler();
@@ -195,38 +195,38 @@ ARM GAS  /tmp/ccDtWxTB.s 			page 1
   69:Core/Src/tim.c **** 
   70:Core/Src/tim.c **** }
  116              		.loc 1 70 1 view .LVU36
- 117 0056 09B0     		add	sp, sp, #36
+ 117 0054 09B0     		add	sp, sp, #36
  118              	.LCFI2:
  119              		.cfi_remember_state
  120              		.cfi_def_cfa_offset 4
  121              		@ sp needed
- 122 0058 5DF804FB 		ldr	pc, [sp], #4
+ 122 0056 5DF804FB 		ldr	pc, [sp], #4
  123              	.L6:
  124              	.LCFI3:
  125              		.cfi_restore_state
   52:Core/Src/tim.c ****   }
  126              		.loc 1 52 5 is_stmt 1 view .LVU37
- 127 005c FFF7FEFF 		bl	Error_Handler
+ 127 005a FFF7FEFF 		bl	Error_Handler
  128              	.LVL3:
- 129 0060 E7E7     		b	.L2
+ 129 005e E7E7     		b	.L2
  130              	.L7:
   57:Core/Src/tim.c ****   }
  131              		.loc 1 57 5 view .LVU38
- 132 0062 FFF7FEFF 		bl	Error_Handler
+ 132 0060 FFF7FEFF 		bl	Error_Handler
  133              	.LVL4:
- 134 0066 ECE7     		b	.L3
+ 134 0064 ECE7     		b	.L3
  135              	.L8:
   64:Core/Src/tim.c ****   }
  136              		.loc 1 64 5 view .LVU39
- 137 0068 FFF7FEFF 		bl	Error_Handler
+ 137 0066 FFF7FEFF 		bl	Error_Handler
  138              	.LVL5:
  139              		.loc 1 70 1 is_stmt 0 view .LVU40
- 140 006c F3E7     		b	.L1
+ 140 006a F3E7     		b	.L1
  141              	.L10:
- 142 006e 00BF     		.align	2
+ 142              		.align	2
  143              	.L9:
- 144 0070 00000000 		.word	.LANCHOR0
- 145 0074 00000140 		.word	1073807360
+ 144 006c 00000000 		.word	.LANCHOR0
+ 145 0070 00000140 		.word	1073807360
  146              		.cfi_endproc
  147              	.LFE141:
  149              		.section	.text.HAL_TIM_Base_MspInit,"ax",%progbits
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccDtWxTB.s 			page 1
  156              	HAL_TIM_Base_MspInit:
  157              	.LVL6:
  158              	.LFB142:
-ARM GAS  /tmp/ccDtWxTB.s 			page 5
+ARM GAS  /tmp/ccfcWQDF.s 			page 5
 
 
   71:Core/Src/tim.c **** 
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccDtWxTB.s 			page 1
  198 0026 1146     		mov	r1, r2
  199 0028 1820     		movs	r0, #24
  200              	.LVL7:
-ARM GAS  /tmp/ccDtWxTB.s 			page 6
+ARM GAS  /tmp/ccfcWQDF.s 			page 6
 
 
  201              		.loc 1 84 5 is_stmt 0 view .LVU53
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccDtWxTB.s 			page 1
  246              		.thumb_func
  248              	HAL_TIM_Base_MspDeInit:
  249              	.LVL14:
-ARM GAS  /tmp/ccDtWxTB.s 			page 7
+ARM GAS  /tmp/ccfcWQDF.s 			page 7
 
 
  250              	.LFB143:
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccDtWxTB.s 			page 1
  281              	.LVL17:
  108:Core/Src/tim.c ****     HAL_NVIC_DisableIRQ(TIM1_UP_TIM10_IRQn);
  282              		.loc 1 108 5 is_stmt 0 view .LVU68
-ARM GAS  /tmp/ccDtWxTB.s 			page 8
+ARM GAS  /tmp/ccfcWQDF.s 			page 8
 
 
  283 0018 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
@@ -464,22 +464,22 @@ ARM GAS  /tmp/ccDtWxTB.s 			page 1
  320              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h"
  321              		.file 10 "Core/Inc/tim.h"
  322              		.file 11 "Core/Inc/main.h"
-ARM GAS  /tmp/ccDtWxTB.s 			page 9
+ARM GAS  /tmp/ccfcWQDF.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 tim.c
-     /tmp/ccDtWxTB.s:19     .text.MX_TIM1_Init:0000000000000000 $t
-     /tmp/ccDtWxTB.s:25     .text.MX_TIM1_Init:0000000000000000 MX_TIM1_Init
-     /tmp/ccDtWxTB.s:144    .text.MX_TIM1_Init:0000000000000070 $d
-     /tmp/ccDtWxTB.s:150    .text.HAL_TIM_Base_MspInit:0000000000000000 $t
-     /tmp/ccDtWxTB.s:156    .text.HAL_TIM_Base_MspInit:0000000000000000 HAL_TIM_Base_MspInit
-     /tmp/ccDtWxTB.s:237    .text.HAL_TIM_Base_MspInit:000000000000005c $d
-     /tmp/ccDtWxTB.s:242    .text.HAL_TIM_Base_MspDeInit:0000000000000000 $t
-     /tmp/ccDtWxTB.s:248    .text.HAL_TIM_Base_MspDeInit:0000000000000000 HAL_TIM_Base_MspDeInit
-     /tmp/ccDtWxTB.s:298    .text.HAL_TIM_Base_MspDeInit:000000000000002c $d
-     /tmp/ccDtWxTB.s:309    .bss.htim1:0000000000000000 htim1
-     /tmp/ccDtWxTB.s:305    .bss.htim1:0000000000000000 $d
+     /tmp/ccfcWQDF.s:19     .text.MX_TIM1_Init:0000000000000000 $t
+     /tmp/ccfcWQDF.s:25     .text.MX_TIM1_Init:0000000000000000 MX_TIM1_Init
+     /tmp/ccfcWQDF.s:144    .text.MX_TIM1_Init:000000000000006c $d
+     /tmp/ccfcWQDF.s:150    .text.HAL_TIM_Base_MspInit:0000000000000000 $t
+     /tmp/ccfcWQDF.s:156    .text.HAL_TIM_Base_MspInit:0000000000000000 HAL_TIM_Base_MspInit
+     /tmp/ccfcWQDF.s:237    .text.HAL_TIM_Base_MspInit:000000000000005c $d
+     /tmp/ccfcWQDF.s:242    .text.HAL_TIM_Base_MspDeInit:0000000000000000 $t
+     /tmp/ccfcWQDF.s:248    .text.HAL_TIM_Base_MspDeInit:0000000000000000 HAL_TIM_Base_MspDeInit
+     /tmp/ccfcWQDF.s:298    .text.HAL_TIM_Base_MspDeInit:000000000000002c $d
+     /tmp/ccfcWQDF.s:309    .bss.htim1:0000000000000000 htim1
+     /tmp/ccfcWQDF.s:305    .bss.htim1:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 HAL_TIM_Base_Init
