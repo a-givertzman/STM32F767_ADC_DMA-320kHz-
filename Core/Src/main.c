@@ -38,14 +38,13 @@
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 extern struct netif gnetif;
-enum {
-	ADC_BUF_LEN = 128,
-	UDP_BUF_HALF_LEN = ADC_BUF_LEN,
-	UDP_BUF_LEN = ADC_BUF_LEN * 2
-};
+#define ADC_BUF_LEN 1024
+#define ADC_BUF_HALF_LEN ADC_BUF_LEN / 2
+#define UDP_BUF_HALF_LEN ADC_BUF_LEN
+#define UDP_BUF_LEN (ADC_BUF_LEN * 2)
 // uint8_t udp_buf[UDP_BUF_LEN];
 uint16_t adc_buf[ADC_BUF_LEN];
-uint16_t adc_buf_test[ADC_BUF_LEN];
+// uint16_t adc_buf_test[ADC_BUF_LEN];
 //float adcVoltage[ADC_BUF_LEN];
 struct udp_pcb *upcb;
 struct pbuf *txBuf;
@@ -84,12 +83,11 @@ static void udpClient_send1(void) {
 //	  adc_buf[i] = i;
 //  }
 //  int len = sprintf(adc_buf, "sending UDP client message %d\n", counter);
-	int len = UDP_BUF_LEN / 2;
+	int len = UDP_BUF_HALF_LEN;
 	txBuf = pbuf_alloc(PBUF_TRANSPORT, len, PBUF_RAM);
 	if (txBuf != NULL) {
     // memcpy(txBuf->payload, &adc_buf, len);
-
-		pbuf_take(txBuf, &(adc_buf_test[0]), len);
+		pbuf_take(txBuf, &(adc_buf[0]), len);
 		// pbuf_take(txBuf, &adc_buf[0], len);
 		err_t err = udp_send(upcb, txBuf);
 		if (err != ERR_OK) {
@@ -109,12 +107,11 @@ static void udpClient_send2(void) {
 //	  adc_buf[i] = i;
 //  }
 //  int len = sprintf(adc_buf, "sending UDP client message %d\n", counter);
-	int len = UDP_BUF_LEN / 2;
+	int len = UDP_BUF_HALF_LEN;
 	txBuf = pbuf_alloc(PBUF_TRANSPORT, len, PBUF_RAM);
 	if (txBuf != NULL) {
     // memcpy(txBuf->payload, &adc_buf, len);
-
-		pbuf_take(txBuf, &(adc_buf_test[64]), len);
+		pbuf_take(txBuf, &(adc_buf[ADC_BUF_HALF_LEN]), len);
 		err_t err = udp_send(upcb, txBuf);
 		if (err != ERR_OK) {
 			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
@@ -255,9 +252,9 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim1);
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
 
-  for (uint16_t i = 0; i < ADC_BUF_LEN; i++) {
-      adc_buf_test[i] = i;
-  }  
+  // for (uint16_t i = 0; i < ADC_BUF_LEN; i++) {
+  //     adc_buf_test[i] = i;
+  // }  
   /* USER CODE END 2 */
 
   /* Infinite loop */
