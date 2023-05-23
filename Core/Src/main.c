@@ -48,6 +48,7 @@ uint16_t adc_buf[ADC_BUF_LEN];
 //float adcVoltage[ADC_BUF_LEN];
 struct udp_pcb *upcb;
 struct pbuf *txBuf;
+int ERROR_CODE = 0;
 //int counter = 8;
 /* USER CODE END PTD */
 
@@ -77,23 +78,13 @@ void SystemClock_Config(void);
 ///
 ///
 static void udpClient_send1(void) {
-//  char data[100];
-//  uint16_t adc_buf[ADC_BUF_LEN];
-//  for (uint16_t i = 0; i < ADC_BUF_LEN; i++) {
-//	  adc_buf[i] = i;
-//  }
-//  int len = sprintf(adc_buf, "sending UDP client message %d\n", counter);
 	int len = UDP_BUF_HALF_LEN;
 	txBuf = pbuf_alloc(PBUF_TRANSPORT, len, PBUF_RAM);
 	if (txBuf != NULL) {
-    // memcpy(txBuf->payload, &adc_buf, len);
 		pbuf_take(txBuf, &(adc_buf[0]), len);
-		// pbuf_take(txBuf, &adc_buf[0], len);
 		err_t err = udp_send(upcb, txBuf);
 		if (err != ERR_OK) {
-			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
-//			HAL_Delay(50);
-//			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
+      ERROR_CODE = 1;
 		}
 	}
 	pbuf_free(txBuf);
@@ -101,22 +92,13 @@ static void udpClient_send1(void) {
 ///
 ///  
 static void udpClient_send2(void) {
-//  char data[100];
-//  uint16_t adc_buf[ADC_BUF_LEN];
-//  for (uint16_t i = 0; i < ADC_BUF_LEN; i++) {
-//	  adc_buf[i] = i;
-//  }
-//  int len = sprintf(adc_buf, "sending UDP client message %d\n", counter);
 	int len = UDP_BUF_HALF_LEN;
 	txBuf = pbuf_alloc(PBUF_TRANSPORT, len, PBUF_RAM);
 	if (txBuf != NULL) {
-    // memcpy(txBuf->payload, &adc_buf, len);
 		pbuf_take(txBuf, &(adc_buf[ADC_BUF_HALF_LEN]), len);
 		err_t err = udp_send(upcb, txBuf);
 		if (err != ERR_OK) {
-			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
-//			HAL_Delay(50);
-//			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
+      ERROR_CODE = 1;
 		}
 	}
 	pbuf_free(txBuf);
@@ -128,9 +110,6 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
 	// return;
 	if (hadc->Instance == ADC1) {
 	  udpClient_send1();
-	// 	for (uint8_t i = 0; i < ADC_BUF_LEN / 2; i++) {
-	// 		adcVoltage[i] = adc_buf[i] * 3.3 / 4095;
-	// 	}
 	}
 }
 ///
@@ -140,42 +119,27 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 // __NOP();
 	if (hadc->Instance == ADC1) {
 	  udpClient_send2();
-//		for (uint16_t i = 0; i < ADC_BUF_LEN; i++) {
-////			adcVoltage[i] = adc_buf[i]; // * 0.000805664;
-//			adcVoltage[i] = adc_buf[i] * 3.3 / 4095;
-//		}
 	}
-//	counter++;
-//	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7); //LED_BLUE
 }
 ///
 ///
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-	if (htim->Instance == TIM1) {
-	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
-
-		// HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0); //LED_GREEN
-	  // HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7); //LED_BLUE
-//		__NOP();
-	}
-}
+// void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+// 	if (htim->Instance == TIM1) {
+// 	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
+// 		// HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0); //LED_GREEN
+// 	  // HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7); //LED_BLUE
+// //		__NOP();
+// 	}
+// }
 ///
 ///
 void HAL_ADC_ErrorCallback (ADC_HandleTypeDef * hadc) {
-	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0); //LED_GREEN
-//	HAL_Delay(50);
-//	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0); //LED_GREEN
+  ERROR_CODE = 1;
 }
 ///
 ///
 void ADC_DMAError (DMA_HandleTypeDef * hdma) {
-	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7); //LED_BLUE
-//	HAL_Delay(50);
-//	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7); //LED_BLUE
-//	HAL_Delay(50);
-//	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
-//	HAL_Delay(50);
-//	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
+  ERROR_CODE = 16;
 }
 ///
 ///
@@ -208,6 +172,65 @@ void udpClient_connect(void) {
 		/* 3. Set a receive callback for the upcb */
 		udp_recv(upcb, udp_receive_callback, NULL);
 	}
+}
+///
+///
+void testLeds(int count) {
+  if (count <= 0) {count = 1;};
+  int duration = 24;  // milles
+  for (uint16_t i = 0; i < count; i++) {
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
+    HAL_Delay(duration);
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  //LED_BLUE
+    HAL_Delay(duration);
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  //LED_BLUE
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);  //LED_GREEN
+    HAL_Delay(duration);
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);  //LED_GREEN
+  }
+}
+///
+///
+void errorLeds(int err) {
+  int count = 3;
+  int duration = 12;  // milles
+  // ERROR
+  if (err > 0 && err <= 15) {
+    for (uint16_t i = 0; i < count; i++) {
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
+      HAL_Delay(duration);
+    }
+  }
+  // WARNING
+  if (err > 15 && err <= 31) {
+    for (uint16_t i = 0; i < count; i++) {
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  //LED_BLUE
+      HAL_Delay(duration);
+    }
+  }
+  // INFO1
+  if (err > 31 && err <= 63) {
+    for (uint16_t i = 0; i < count; i++) {
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  //LED_BLUE
+      HAL_Delay(duration);
+    }
+  }
+  // INFO2
+  if (err > 63 && err <= 127) {
+    for (uint16_t i = 0; i < count; i++) {
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);  //LED_GREEN
+      HAL_Delay(duration);
+    }
+  }
+}
+///
+///
+void handleError(int *err) {
+  int e = *err;
+  *err = 0;
+  errorLeds(e);
 }
 /* USER CODE END 0 */
 
@@ -248,10 +271,10 @@ int main(void)
   MX_TIM1_Init();
   MX_LWIP_Init();
   /* USER CODE BEGIN 2 */
+  testLeds(2);
   udpClient_connect();
   HAL_TIM_Base_Start_IT(&htim1);
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
-
   // for (uint16_t i = 0; i < ADC_BUF_LEN; i++) {
   //     adc_buf_test[i] = i;
   // }  
@@ -262,6 +285,9 @@ int main(void)
   while (1)
   {
 //	  HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
+    if (ERROR_CODE > 0) {
+      handleError(&ERROR_CODE);
+    }
 	  ethernetif_input(&gnetif);
 
 	  sys_check_timeouts();
