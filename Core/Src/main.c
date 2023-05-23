@@ -37,6 +37,10 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+#define UDP_SYN 22
+#define UDP_EOT 4
+#define CHAN_ADDR = 3;
+
 extern struct netif gnetif;
 #define ADC_BUF_LEN 1024
 #define ADC_BUF_HALF_LEN ADC_BUF_LEN / 2
@@ -48,7 +52,7 @@ uint16_t adc_buf[ADC_BUF_LEN];
 //float adcVoltage[ADC_BUF_LEN];
 struct udp_pcb *upcb;
 struct pbuf *txBuf;
-int ERROR_CODE = 0;
+int APP_ERROR_CODE = 0;
 //int counter = 8;
 /* USER CODE END PTD */
 
@@ -78,13 +82,14 @@ void SystemClock_Config(void);
 ///
 ///
 static void udpClient_send1(void) {
-	int len = UDP_BUF_HALF_LEN;
+  u16_t offset = 3;
+	int len = UDP_BUF_HALF_LEN + offset + 1;
 	txBuf = pbuf_alloc(PBUF_TRANSPORT, len, PBUF_RAM);
 	if (txBuf != NULL) {
-		pbuf_take(txBuf, &(adc_buf[0]), len);
+		pbuf_take_at(txBuf, &(adc_buf[0]), len, offset);
 		err_t err = udp_send(upcb, txBuf);
 		if (err != ERR_OK) {
-      ERROR_CODE = 1;
+      APP_ERROR_CODE = 1;
 		}
 	}
 	pbuf_free(txBuf);
@@ -92,13 +97,14 @@ static void udpClient_send1(void) {
 ///
 ///  
 static void udpClient_send2(void) {
-	int len = UDP_BUF_HALF_LEN;
+  u16_t offset = 3;
+	int len = UDP_BUF_HALF_LEN + offset + 1;
 	txBuf = pbuf_alloc(PBUF_TRANSPORT, len, PBUF_RAM);
 	if (txBuf != NULL) {
-		pbuf_take(txBuf, &(adc_buf[ADC_BUF_HALF_LEN]), len);
+		pbuf_take_at(txBuf, &(adc_buf[ADC_BUF_HALF_LEN]), len, offset);
 		err_t err = udp_send(upcb, txBuf);
 		if (err != ERR_OK) {
-      ERROR_CODE = 1;
+      APP_ERROR_CODE = 1;
 		}
 	}
 	pbuf_free(txBuf);
@@ -134,12 +140,16 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 ///
 ///
 void HAL_ADC_ErrorCallback (ADC_HandleTypeDef * hadc) {
-  ERROR_CODE = 1;
+  APP_ERROR_CODE = 16;
+  HAL_ADC_Stop_DMA(&hadc1);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
 }
 ///
 ///
 void ADC_DMAError (DMA_HandleTypeDef * hdma) {
-  ERROR_CODE = 16;
+  APP_ERROR_CODE = 32;
+  HAL_ADC_Stop_DMA(&hadc1);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
 }
 ///
 ///
@@ -193,8 +203,8 @@ void testLeds(int count) {
 ///
 ///
 void errorLeds(int err) {
-  int count = 3;
-  int duration = 12;  // milles
+  int count = 2;
+  int duration = 24;  // milles
   // ERROR
   if (err > 0 && err <= 15) {
     for (uint16_t i = 0; i < count; i++) {
@@ -227,9 +237,9 @@ void errorLeds(int err) {
 }
 ///
 ///
-void handleError(int *err) {
-  int e = *err;
-  *err = 0;
+void handleError() {
+  int e = APP_ERROR_CODE;
+  APP_ERROR_CODE = 0;
   errorLeds(e);
 }
 /* USER CODE END 0 */
@@ -275,6 +285,7 @@ int main(void)
   udpClient_connect();
   HAL_TIM_Base_Start_IT(&htim1);
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
+  testLeds(1);
   // for (uint16_t i = 0; i < ADC_BUF_LEN; i++) {
   //     adc_buf_test[i] = i;
   // }  
@@ -285,8 +296,8 @@ int main(void)
   while (1)
   {
 //	  HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
-    if (ERROR_CODE > 0) {
-      handleError(&ERROR_CODE);
+    if (APP_ERROR_CODE > 0) {
+      handleError();
     }
 	  ethernetif_input(&gnetif);
 
