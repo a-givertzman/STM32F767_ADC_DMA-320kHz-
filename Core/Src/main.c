@@ -39,7 +39,7 @@
 /* USER CODE BEGIN PTD */
 #define UDP_SYN 22
 #define UDP_EOT 4
-#define CHAN_ADDR = 3;
+#define CHAN_ADDR 3
 
 extern struct netif gnetif;
 #define ADC_BUF_LEN 1024
@@ -81,12 +81,19 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 ///
 ///
+#define UDP_HEAD_BUF_LEN 2
+uint8_t buf_head[UDP_HEAD_BUF_LEN] = {UDP_SYN, CHAN_ADDR};
+
 static void udpClient_send1(void) {
-  u16_t offset = 3;
-	int len = UDP_BUF_HALF_LEN + offset + 1;
-	txBuf = pbuf_alloc(PBUF_TRANSPORT, len, PBUF_RAM);
+	txBuf = pbuf_alloc(PBUF_TRANSPORT, UDP_BUF_HALF_LEN + UDP_HEAD_BUF_LEN, PBUF_RAM);
 	if (txBuf != NULL) {
-		pbuf_take_at(txBuf, &(adc_buf[0]), len, offset);
+		pbuf_take_at(txBuf, &buf_head, UDP_HEAD_BUF_LEN, 0);
+		pbuf_take_at(
+      txBuf, 
+      &(adc_buf[0]), 
+      UDP_BUF_HALF_LEN,   // length
+      UDP_HEAD_BUF_LEN    // offset
+    );
 		err_t err = udp_send(upcb, txBuf);
 		if (err != ERR_OK) {
       APP_ERROR_CODE = 1;
@@ -97,11 +104,15 @@ static void udpClient_send1(void) {
 ///
 ///  
 static void udpClient_send2(void) {
-  u16_t offset = 3;
-	int len = UDP_BUF_HALF_LEN + offset + 1;
-	txBuf = pbuf_alloc(PBUF_TRANSPORT, len, PBUF_RAM);
+	txBuf = pbuf_alloc(PBUF_TRANSPORT, UDP_BUF_HALF_LEN + UDP_HEAD_BUF_LEN, PBUF_RAM);
 	if (txBuf != NULL) {
-		pbuf_take_at(txBuf, &(adc_buf[ADC_BUF_HALF_LEN]), len, offset);
+		pbuf_take_at(txBuf, &buf_head, UDP_HEAD_BUF_LEN, 0);    
+		pbuf_take_at(
+      txBuf, 
+      &(adc_buf[ADC_BUF_HALF_LEN]), 
+      UDP_BUF_HALF_LEN,   // length
+      UDP_HEAD_BUF_LEN    // offset
+    );
 		err_t err = udp_send(upcb, txBuf);
 		if (err != ERR_OK) {
       APP_ERROR_CODE = 1;
