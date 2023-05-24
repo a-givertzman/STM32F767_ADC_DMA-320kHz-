@@ -40,6 +40,11 @@
 #define UDP_SYN 22
 #define UDP_EOT 4
 #define CHAN_ADDR 3
+enum {
+  UDP_TYPE_INT8 = 8,
+  UDP_TYPE_DOUBLE = 16,
+  UDP_TYPE_ARRAY = 32
+};
 
 extern struct netif gnetif;
 #define ADC_BUF_LEN 1024
@@ -51,7 +56,7 @@ uint16_t adc_buf[ADC_BUF_LEN];
 // uint16_t adc_buf_test[ADC_BUF_LEN];
 //float adcVoltage[ADC_BUF_LEN];
 struct udp_pcb *upcb;
-struct pbuf *txBuf;
+static struct pbuf *txBuf;
 int APP_ERROR_CODE = 0;
 //int counter = 8;
 /* USER CODE END PTD */
@@ -81,61 +86,47 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 ///
 ///
-#define UDP_HEAD_BUF_LEN 2
-uint8_t buf_head[UDP_HEAD_BUF_LEN] = {UDP_SYN, CHAN_ADDR};
-
-static void udpClient_send1(void) {
-	txBuf = pbuf_alloc(PBUF_TRANSPORT, UDP_BUF_HALF_LEN + UDP_HEAD_BUF_LEN, PBUF_RAM);
-	if (txBuf != NULL) {
-		pbuf_take_at(txBuf, &buf_head, UDP_HEAD_BUF_LEN, 0);
-		pbuf_take_at(
-      txBuf, 
-      &(adc_buf[0]), 
-      UDP_BUF_HALF_LEN,   // length
-      UDP_HEAD_BUF_LEN    // offset
-    );
-		err_t err = udp_send(upcb, txBuf);
-		if (err != ERR_OK) {
-      APP_ERROR_CODE = 1;
-		}
-	}
-	pbuf_free(txBuf);
-}
+#define UDP_HEAD_BUF_LEN 3
+const uint8_t buf_head[UDP_HEAD_BUF_LEN] = {UDP_SYN, CHAN_ADDR, UDP_TYPE_ARRAY};
 ///
+/// 
+static void udpClient_send(void) {
+  err_t err = udp_send(upcb, txBuf);
+  if (err != ERR_OK) {
+    APP_ERROR_CODE = 1;
+  }
+}
+/// 
 ///  
-static void udpClient_send2(void) {
-	txBuf = pbuf_alloc(PBUF_TRANSPORT, UDP_BUF_HALF_LEN + UDP_HEAD_BUF_LEN, PBUF_RAM);
+static void buildBuferHalf(uint8_t half) {
+  uint16_t *buf;
+  if (half == 1) {
+    buf = &(adc_buf[0]);
+  } else {
+    buf = &(adc_buf[ADC_BUF_HALF_LEN]);
+  }
 	if (txBuf != NULL) {
-		pbuf_take_at(txBuf, &buf_head, UDP_HEAD_BUF_LEN, 0);    
 		pbuf_take_at(
       txBuf, 
-      &(adc_buf[ADC_BUF_HALF_LEN]), 
+      buf,
       UDP_BUF_HALF_LEN,   // length
       UDP_HEAD_BUF_LEN    // offset
     );
-		err_t err = udp_send(upcb, txBuf);
-		if (err != ERR_OK) {
-      APP_ERROR_CODE = 1;
-		}
+		udpClient_send();
 	}
-	pbuf_free(txBuf);
 }
 ///
 ///
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
-	// __NOP();
-	// return;
 	if (hadc->Instance == ADC1) {
-	  udpClient_send1();
+	  buildBuferHalf(1);
 	}
 }
 ///
 ///
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
-//	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7); //LED_BLUE
-// __NOP();
 	if (hadc->Instance == ADC1) {
-	  udpClient_send2();
+	  buildBuferHalf(2);
 	}
 }
 ///
@@ -253,6 +244,19 @@ void handleError() {
   APP_ERROR_CODE = 0;
   errorLeds(e);
 }
+///
+/// | u8  | u8   | u8   | u8[1024]  | 
+/// | SYN | ADDR | TYPE | DATA      |
+/// SYN = 22 - message starts with
+/// ADDR = 0...255 - an address of the signal
+/// TYPE
+///       8 - 1 byte integer value
+///       16 - 2 byte float value
+///       32 - u16[1024] an array of 2 byte values of length 512
+void prepareTxBuf(void) {
+	txBuf = pbuf_alloc(PBUF_TRANSPORT, UDP_BUF_HALF_LEN + UDP_HEAD_BUF_LEN, PBUF_RAM);
+  pbuf_take_at(txBuf, &buf_head, UDP_HEAD_BUF_LEN, 0);
+}
 /* USER CODE END 0 */
 
 /**
@@ -292,6 +296,7 @@ int main(void)
   MX_TIM1_Init();
   MX_LWIP_Init();
   /* USER CODE BEGIN 2 */
+  prepareTxBuf();
   testLeds(2);
   udpClient_connect();
   HAL_TIM_Base_Start_IT(&htim1);
