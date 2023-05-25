@@ -343,7 +343,6 @@ int main(void)
       handleError();
     }
 	  ethernetif_input(&gnetif);
-
 	  sys_check_timeouts();
     /* USER CODE END WHILE */
 
