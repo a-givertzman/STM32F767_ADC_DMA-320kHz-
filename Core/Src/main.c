@@ -90,7 +90,7 @@ void SystemClock_Config(void);
 const uint8_t buf_head[UDP_HEAD_BUF_LEN] = {UDP_SYN, CHAN_ADDR, UDP_TYPE_ARRAY};
 ///
 /// 
-static void udpClient_send(void) {
+static void udpClientSend(void) {
   err_t err = udp_send(upcb, txBuf);
   if (err != ERR_OK) {
     APP_ERROR_CODE = 1;
@@ -113,7 +113,7 @@ static void buildBuferHalf(uint8_t half) {
       UDP_HEAD_BUF_LEN    // offset
     );
 	  // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
-		udpClient_send();
+		udpClientSend();
 	  // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
 	}
 }
@@ -180,7 +180,7 @@ void udp_receive_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, const
 }
 ///
 ///
-void udpClient_connect(void) {
+void udpClientConnect(void) {
 	err_t err;
 	/* 1. Create a new UDP control block  */
 	upcb = udp_new();
@@ -195,7 +195,7 @@ void udpClient_connect(void) {
 	err= udp_connect(upcb, &DestIPaddr, udpPort);
 	if (err == ERR_OK) {
 		/* 2. Send message to server */
-		// udpClient_send();
+		// udpClientSend();
 		/* 3. Set a receive callback for the upcb */
 		udp_recv(upcb, udp_receive_callback, NULL);
 	}
@@ -313,7 +313,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   prepareTxBuf();
   testLeds(2);
-  udpClient_connect();
+  udpClientConnect();
   HAL_TIM_Base_Start_IT(&htim1);
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
   testLeds(1);
