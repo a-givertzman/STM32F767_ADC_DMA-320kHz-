@@ -58,6 +58,7 @@ uint16_t adc_buf[ADC_BUF_LEN];
 struct udp_pcb *upcb;
 static struct pbuf *txBuf;
 int APP_ERROR_CODE = 0;
+int APP_ERROR_COUNT = 0;
 //int counter = 8;
 /* USER CODE END PTD */
 
@@ -147,6 +148,7 @@ void delayTick(u16_t ticks) {
 ///
 ///
 void softReset(void) {
+  errorLeds(1);
   NVIC_SystemReset();
   while (1) {}
 }
@@ -262,6 +264,10 @@ void errorLeds(int err) {
 ///
 void handleError() {
   int e = APP_ERROR_CODE;
+  APP_ERROR_COUNT++;
+  if (APP_ERROR_COUNT > 3) {
+    softReset();
+  }
   APP_ERROR_CODE = 0;
   errorLeds(e);
 }
