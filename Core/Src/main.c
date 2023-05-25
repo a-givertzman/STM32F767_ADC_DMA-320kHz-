@@ -146,6 +146,12 @@ void delayTick(u16_t ticks) {
 }
 ///
 ///
+void softReset(void) {
+  NVIC_SystemReset();
+  while (1) {}
+}
+///
+///
 // void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 // 	if (htim->Instance == TIM1) {
 // 	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
