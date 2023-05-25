@@ -112,17 +112,18 @@ static void buildBuferHalf(uint8_t half) {
       UDP_BUF_HALF_LEN,   // length
       UDP_HEAD_BUF_LEN    // offset
     );
-	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
+	  // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
 		udpClient_send();
-	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
+	  // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
 	}
 }
 ///
 ///
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
 	if (hadc->Instance == ADC1) {
-    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
-    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
+    // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
+    // delayTick(2);
+    // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
 	  buildBuferHalf(1);
 	}
 }
@@ -130,10 +131,18 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
 ///
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 	if (hadc->Instance == ADC1) {
-    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
-    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
+    // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
+    // delayTick(2);
+    // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
 	  buildBuferHalf(2);
 	}
+}
+///
+///
+void delayTick(u16_t ticks) {
+  while (ticks >= 0) {
+    ticks--;
+  }
 }
 ///
 ///
