@@ -1,9 +1,14 @@
 # ADC Converter
 
-- sampling frequency: 320 kHz
-- interface: Ethernet UDP
+STM32F7 ADC Converter using DMA (320 kHz), measured samples tranfered over Ethernet
 
 ## ADC
+
+- ADC1 in3 used
+- runs in background using DMA (circular mode)
+- sampling frequency: 320 kHz
+- resolution: 12 bit
+- sampling time: 15 cycles
 
 ## Ethernet interface
 
