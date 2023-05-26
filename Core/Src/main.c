@@ -87,6 +87,41 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 ///
 ///
+void errorLeds(int err) {
+  int count = 2;
+  int duration = 24;  // milles
+  // ERROR
+  if (err > 0 && err <= 15) {
+    for (uint16_t i = 0; i < count; i++) {
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
+      HAL_Delay(duration);
+    }
+  }
+  // WARNING
+  if (err > 15 && err <= 31) {
+    for (uint16_t i = 0; i < count; i++) {
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  //LED_BLUE
+      HAL_Delay(duration);
+    }
+  }
+  // INFO1
+  if (err > 31 && err <= 63) {
+    for (uint16_t i = 0; i < count; i++) {
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  //LED_BLUE
+      HAL_Delay(duration);
+    }
+  }
+  // INFO2
+  if (err > 63 && err <= 127) {
+    for (uint16_t i = 0; i < count; i++) {
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);  //LED_GREEN
+      HAL_Delay(duration);
+    }
+  }
+}
+///
+///
 #define UDP_HEAD_BUF_LEN 3
 const uint8_t buf_head[UDP_HEAD_BUF_LEN] = {
   UDP_SYN, 
@@ -227,41 +262,6 @@ void testLeds(int count) {
     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);  //LED_GREEN
     HAL_Delay(duration);
     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);  //LED_GREEN
-  }
-}
-///
-///
-void errorLeds(int err) {
-  int count = 2;
-  int duration = 24;  // milles
-  // ERROR
-  if (err > 0 && err <= 15) {
-    for (uint16_t i = 0; i < count; i++) {
-      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
-      HAL_Delay(duration);
-    }
-  }
-  // WARNING
-  if (err > 15 && err <= 31) {
-    for (uint16_t i = 0; i < count; i++) {
-      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
-      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  //LED_BLUE
-      HAL_Delay(duration);
-    }
-  }
-  // INFO1
-  if (err > 31 && err <= 63) {
-    for (uint16_t i = 0; i < count; i++) {
-      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  //LED_BLUE
-      HAL_Delay(duration);
-    }
-  }
-  // INFO2
-  if (err > 63 && err <= 127) {
-    for (uint16_t i = 0; i < count; i++) {
-      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);  //LED_GREEN
-      HAL_Delay(duration);
-    }
   }
 }
 ///
