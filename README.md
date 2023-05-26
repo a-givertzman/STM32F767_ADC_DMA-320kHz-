@@ -10,6 +10,8 @@ STM32F7 ADC Converter using DMA (320 kHz), measured samples tranfered over Ether
 - resolution: 12 bit
 - sampling time: 15 cycles
 
+- ADC fills half buffer in 1600 us
+
 ## Ethernet interface
 
 - ip: static 192.168.120.173
@@ -25,6 +27,8 @@ STM32F7 ADC Converter using DMA (320 kHz), measured samples tranfered over Ether
         8 - 1 byte integer value
         16 - 2 byte float value
         32 - u16[512] an array of 2 byte values of length 512
+
+- UDP message sent in 140 us
 
 ## Compile & run
 
