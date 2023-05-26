@@ -88,7 +88,11 @@ void SystemClock_Config(void);
 ///
 ///
 #define UDP_HEAD_BUF_LEN 3
-const uint8_t buf_head[UDP_HEAD_BUF_LEN] = {UDP_SYN, CHAN_ADDR, UDP_TYPE_ARRAY};
+const uint8_t buf_head[UDP_HEAD_BUF_LEN] = {
+  UDP_SYN, 
+  CHAN_ADDR, 
+  UDP_TYPE_ARRAY,
+};
 ///
 /// 
 static void udpClientSend(void) {
