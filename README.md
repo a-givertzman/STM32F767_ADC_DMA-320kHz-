@@ -28,6 +28,6 @@ STM32F7 ADC Converter using DMA (320 kHz), measured samples tranfered over Ether
 
 ## Compile & run
 
-    ```bash
-    make && probe-run --chip STM32F767ZITx ./build/STM32F767_ADC_DMA.elf
-    ```
+```bash
+make && probe-run --chip STM32F767ZITx ./build/STM32F767_ADC_DMA.elf
+```
