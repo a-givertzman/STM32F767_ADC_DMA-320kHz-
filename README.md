@@ -10,7 +10,9 @@
 - ip: static 192.168.120.173
 - client ip: static 192.168.120.173
 - UDP message:
-| u8  | u8   | u8   | u8[1024]  | 
+
+| u8  | u8   | u8   | u8[1024]  |
+|-----|------|------|-----------|
 | SYN | ADDR | TYPE | DATA      |
     SYN = 22 - message starts with
     ADDR = 0...255 - an address of the signal
