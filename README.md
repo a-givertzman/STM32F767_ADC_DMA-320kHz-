@@ -23,6 +23,6 @@
 
 ## Compile & run
 
-```bash
-make && probe-run --chip STM32F767ZITx ./build/STM32F767_ADC_DMA.elf
-```
+    ```bash
+    make && probe-run --chip STM32F767ZITx ./build/STM32F767_ADC_DMA.elf
+    ```
