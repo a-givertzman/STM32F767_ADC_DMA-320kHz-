@@ -10,7 +10,7 @@ STM32F7 ADC Converter using DMA (320 kHz), measured samples tranfered over Ether
 - resolution: 12 bit
 - sampling time: 15 cycles
 
-- ADC fills half buffer in 1600 us
+- ADC fills half of buffer in 1600 us
 
 ## Ethernet interface
 
