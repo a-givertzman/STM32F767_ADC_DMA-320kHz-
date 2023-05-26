@@ -24,7 +24,7 @@ STM32F7 ADC Converter using DMA (320 kHz), measured samples tranfered over Ether
     TYPE
         8 - 1 byte integer value
         16 - 2 byte float value
-        32 - u16[1024] an array of 2 byte values of length 512
+        32 - u16[512] an array of 2 byte values of length 512
 
 ## Compile & run
 
