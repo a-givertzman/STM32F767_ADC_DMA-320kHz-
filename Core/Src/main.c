@@ -239,7 +239,7 @@ void udpClientConnect(void) {
 	udp_bind(upcb, &myIPaddr, udpPort);
 	/* configure destination IP address and port */
 	ip_addr_t DestIPaddr;
-	IP_ADDR4(&DestIPaddr, 192, 168, 120, 255);
+	IP_ADDR4(&DestIPaddr, 192, 168, 100, 255);
 	err= udp_connect(upcb, &DestIPaddr, udpPort);
 	if (err == ERR_OK) {
 		/* 2. Send message to server */
