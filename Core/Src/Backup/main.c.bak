@@ -58,6 +58,7 @@ uint16_t adc_buf[ADC_BUF_LEN];
 struct udp_pcb *upcb;
 static struct pbuf *txBuf;
 int APP_ERROR_CODE = 0;
+int APP_ERROR_COUNT = 0;
 //int counter = 8;
 /* USER CODE END PTD */
 
@@ -84,126 +85,6 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-///
-///
-#define UDP_HEAD_BUF_LEN 3
-const uint8_t buf_head[UDP_HEAD_BUF_LEN] = {UDP_SYN, CHAN_ADDR, UDP_TYPE_ARRAY};
-///
-/// 
-static void udpClient_send(void) {
-  err_t err = udp_send(upcb, txBuf);
-  if (err != ERR_OK) {
-    APP_ERROR_CODE = 1;
-  }
-}
-/// 
-///  
-static void buildBuferHalf(uint8_t half) {
-  uint16_t *buf;
-  if (half == 1) {
-    buf = &(adc_buf[0]);
-  } else {
-    buf = &(adc_buf[ADC_BUF_HALF_LEN]);
-  }
-	if (txBuf != NULL) {
-		pbuf_take_at(
-      txBuf, 
-      buf,
-      UDP_BUF_HALF_LEN,   // length
-      UDP_HEAD_BUF_LEN    // offset
-    );
-	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
-		udpClient_send();
-	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
-	}
-}
-///
-///
-void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
-	if (hadc->Instance == ADC1) {
-	  buildBuferHalf(1);
-	}
-}
-///
-///
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
-	if (hadc->Instance == ADC1) {
-	  buildBuferHalf(2);
-	}
-}
-///
-///
-// void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-// 	if (htim->Instance == TIM1) {
-// 	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
-// 		// HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0); //LED_GREEN
-// 	  // HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7); //LED_BLUE
-// //		__NOP();
-// 	}
-// }
-///
-///
-void HAL_ADC_ErrorCallback (ADC_HandleTypeDef * hadc) {
-  APP_ERROR_CODE = 16;
-  HAL_ADC_Stop_DMA(&hadc1);
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
-}
-///
-///
-void ADC_DMAError (DMA_HandleTypeDef * hdma) {
-  APP_ERROR_CODE = 32;
-  HAL_ADC_Stop_DMA(&hadc1);
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
-}
-///
-///
-void udp_receive_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port) {
-	/* Copy the data from the pbuf */
-//	strncpy (buffer, (char *)p->payload, p->len);
-	/*increment message count */
-//	counter++;
-	/* Free receive pbuf */
-	pbuf_free(p);
-}
-///
-///
-void udpClient_connect(void) {
-	err_t err;
-	/* 1. Create a new UDP control block  */
-	upcb = udp_new();
-	/* Bind the block to module's IP and port */
-	ip_addr_t myIPaddr;
-	IP_ADDR4(&myIPaddr, 192, 168, 120, 173);
-	u16_t udpPort = 15180;
-	udp_bind(upcb, &myIPaddr, udpPort);
-	/* configure destination IP address and port */
-	ip_addr_t DestIPaddr;
-	IP_ADDR4(&DestIPaddr, 192, 168, 120, 172);
-	err= udp_connect(upcb, &DestIPaddr, udpPort);
-	if (err == ERR_OK) {
-		/* 2. Send message to server */
-		// udpClient_send();
-		/* 3. Set a receive callback for the upcb */
-		udp_recv(upcb, udp_receive_callback, NULL);
-	}
-}
-///
-///
-void testLeds(int count) {
-  if (count <= 0) {count = 1;};
-  int duration = 24;  // milles
-  for (uint16_t i = 0; i < count; i++) {
-    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
-    HAL_Delay(duration);
-    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
-    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  //LED_BLUE
-    HAL_Delay(duration);
-    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  //LED_BLUE
-    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);  //LED_GREEN
-    HAL_Delay(duration);
-    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);  //LED_GREEN
-  }
-}
 ///
 ///
 void errorLeds(int err) {
@@ -241,8 +122,157 @@ void errorLeds(int err) {
 }
 ///
 ///
+#define UDP_HEAD_BUF_LEN 3
+const uint8_t buf_head[UDP_HEAD_BUF_LEN] = {
+  UDP_SYN, 
+  CHAN_ADDR, 
+  UDP_TYPE_ARRAY,
+};
+///
+/// 
+static void udpClientSend(void) {
+  err_t err = udp_send(upcb, txBuf);
+  if (err != ERR_OK) {
+    APP_ERROR_CODE = 1;
+  }
+}
+/// 
+///  
+static void buildBuferHalf(uint8_t half) {
+  uint16_t *buf;
+  if (half == 1) {
+    buf = &(adc_buf[0]);
+  } else {
+    buf = &(adc_buf[ADC_BUF_HALF_LEN]);
+  }
+	if (txBuf != NULL) {
+		pbuf_take_at(
+      txBuf, 
+      buf,
+      UDP_BUF_HALF_LEN,   // length
+      UDP_HEAD_BUF_LEN    // offset
+    );
+	  // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
+		udpClientSend();
+	  // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
+	}
+}
+///
+///
+void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
+	if (hadc->Instance == ADC1) {
+    // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
+    // delayTick(500);
+    // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
+	  buildBuferHalf(1);
+	}
+}
+///
+///
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
+	if (hadc->Instance == ADC1) {
+    // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
+    // delayTick(500);
+    // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
+	  buildBuferHalf(2);
+	}
+}
+///
+///
+void delayTick(int16_t ticks) {
+  while (ticks > 0) {
+    ticks--;
+  }
+}
+///
+///
+void softReset(void) {
+  errorLeds(1);
+  NVIC_SystemReset();
+  while (1) {}
+}
+///
+///
+// void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+// 	if (htim->Instance == TIM1) {
+// 	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
+// 		// HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0); //LED_GREEN
+// 	  // HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7); //LED_BLUE
+// //		__NOP();
+// 	}
+// }
+///
+///
+void HAL_ADC_ErrorCallback (ADC_HandleTypeDef * hadc) {
+  APP_ERROR_CODE = 16;
+  HAL_ADC_Stop_DMA(&hadc1);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
+}
+///
+///
+void ADC_DMAError (DMA_HandleTypeDef * hdma) {
+  APP_ERROR_CODE = 32;
+  HAL_ADC_Stop_DMA(&hadc1);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
+}
+///
+///
+void udp_receive_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port) {
+  errorLeds(64);
+	/* Copy the data from the pbuf */
+//	strncpy (buffer, (char *)p->payload, p->len);
+	/*increment message count */
+//	counter++;
+	/* Free receive pbuf */
+	pbuf_free(p);
+}
+///
+///
+void udpClientConnect(void) {
+	err_t err;
+	/* 1. Create a new UDP control block  */
+	upcb = udp_new();
+	/* Bind the block to module's IP and port */
+	ip_addr_t myIPaddr;
+	IP_ADDR4(&myIPaddr, 192, 168, 100, 173);
+	u16_t udpPort = 15180;
+	udp_bind(upcb, &myIPaddr, udpPort);
+	/* configure destination IP address and port */
+	ip_addr_t DestIPaddr;
+	IP_ADDR4(&DestIPaddr, 192, 168, 120, 255);
+	err= udp_connect(upcb, &DestIPaddr, udpPort);
+	if (err == ERR_OK) {
+		/* 2. Send message to server */
+		// udpClientSend();
+		/* 3. Set a receive callback for the upcb */
+		udp_recv(upcb, udp_receive_callback, NULL);
+	}
+}
+///
+///
+void testLeds(int count) {
+  if (count <= 0) {count = 1;};
+  int duration = 24;  // milles
+  for (uint16_t i = 0; i < count; i++) {
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
+    HAL_Delay(duration);
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  //LED_BLUE
+    HAL_Delay(duration);
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  //LED_BLUE
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);  //LED_GREEN
+    HAL_Delay(duration);
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);  //LED_GREEN
+  }
+}
+///
+///
 void handleError() {
   int e = APP_ERROR_CODE;
+  APP_ERROR_COUNT++;
+  if (APP_ERROR_COUNT > 3) {
+    softReset();
+  }
   APP_ERROR_CODE = 0;
   errorLeds(e);
 }
@@ -300,7 +330,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   prepareTxBuf();
   testLeds(2);
-  udpClient_connect();
+  udpClientConnect();
   HAL_TIM_Base_Start_IT(&htim1);
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
   testLeds(1);
@@ -318,7 +348,6 @@ int main(void)
       handleError();
     }
 	  ethernetif_input(&gnetif);
-
 	  sys_check_timeouts();
     /* USER CODE END WHILE */
 

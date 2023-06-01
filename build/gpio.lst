@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccH7BolN.s 			page 1
+ARM GAS  /tmp/cc5vEWxI.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccH7BolN.s 			page 1
   29:Core/Src/gpio.c **** /* Configure GPIO                                                             */
   30:Core/Src/gpio.c **** /*----------------------------------------------------------------------------*/
   31:Core/Src/gpio.c **** /* USER CODE BEGIN 1 */
-ARM GAS  /tmp/ccH7BolN.s 			page 2
+ARM GAS  /tmp/cc5vEWxI.s 			page 2
 
 
   32:Core/Src/gpio.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccH7BolN.s 			page 1
   65              	.LBE2:
   66              		.loc 1 48 3 view .LVU8
   49:Core/Src/gpio.c ****   __HAL_RCC_GPIOC_CLK_ENABLE();
-ARM GAS  /tmp/ccH7BolN.s 			page 3
+ARM GAS  /tmp/cc5vEWxI.s 			page 3
 
 
   67              		.loc 1 49 3 view .LVU9
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccH7BolN.s 			page 1
  118 0060 1A63     		str	r2, [r3, #48]
  119              		.loc 1 52 3 view .LVU30
  120 0062 1B6B     		ldr	r3, [r3, #48]
-ARM GAS  /tmp/ccH7BolN.s 			page 4
+ARM GAS  /tmp/cc5vEWxI.s 			page 4
 
 
  121 0064 03F04003 		and	r3, r3, #64
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccH7BolN.s 			page 1
   68:Core/Src/gpio.c ****   GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_11;
  160              		.loc 1 68 3 view .LVU44
  161              		.loc 1 68 23 is_stmt 0 view .LVU45
-ARM GAS  /tmp/ccH7BolN.s 			page 5
+ARM GAS  /tmp/cc5vEWxI.s 			page 5
 
 
  162 009e 4FF44063 		mov	r3, #3072
@@ -283,14 +283,14 @@ ARM GAS  /tmp/ccH7BolN.s 			page 1
  196              		.file 3 "/home/lobanov/st/stm32cubeclt_1.12.1/GNU-tools-for-STM32/arm-none-eabi/include/sys/_stdin
  197              		.file 4 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
  198              		.file 5 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h"
-ARM GAS  /tmp/ccH7BolN.s 			page 6
+ARM GAS  /tmp/cc5vEWxI.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 gpio.c
-     /tmp/ccH7BolN.s:19     .text.MX_GPIO_Init:0000000000000000 $t
-     /tmp/ccH7BolN.s:25     .text.MX_GPIO_Init:0000000000000000 MX_GPIO_Init
-     /tmp/ccH7BolN.s:187    .text.MX_GPIO_Init:00000000000000b8 $d
+     /tmp/cc5vEWxI.s:19     .text.MX_GPIO_Init:0000000000000000 $t
+     /tmp/cc5vEWxI.s:25     .text.MX_GPIO_Init:0000000000000000 MX_GPIO_Init
+     /tmp/cc5vEWxI.s:187    .text.MX_GPIO_Init:00000000000000b8 $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin

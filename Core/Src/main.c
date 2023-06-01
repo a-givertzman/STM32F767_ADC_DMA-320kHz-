@@ -218,6 +218,7 @@ void ADC_DMAError (DMA_HandleTypeDef * hdma) {
 ///
 ///
 void udp_receive_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port) {
+  errorLeds(64);
 	/* Copy the data from the pbuf */
 //	strncpy (buffer, (char *)p->payload, p->len);
 	/*increment message count */
@@ -233,12 +234,12 @@ void udpClientConnect(void) {
 	upcb = udp_new();
 	/* Bind the block to module's IP and port */
 	ip_addr_t myIPaddr;
-	IP_ADDR4(&myIPaddr, 192, 168, 120, 173);
+	IP_ADDR4(&myIPaddr, 192, 168, 100, 173);
 	u16_t udpPort = 15180;
 	udp_bind(upcb, &myIPaddr, udpPort);
 	/* configure destination IP address and port */
 	ip_addr_t DestIPaddr;
-	IP_ADDR4(&DestIPaddr, 192, 168, 120, 172);
+	IP_ADDR4(&DestIPaddr, 192, 168, 120, 255);
 	err= udp_connect(upcb, &DestIPaddr, udpPort);
 	if (err == ERR_OK) {
 		/* 2. Send message to server */
