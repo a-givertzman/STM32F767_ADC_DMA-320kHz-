@@ -219,17 +219,23 @@ void ADC_DMAError (DMA_HandleTypeDef * hdma) {
 ///
 void udp_receive_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port) {
   errorLeds(64);
-	/* Copy the data from the pbuf */
-//	strncpy (buffer, (char *)p->payload, p->len);
-	/*increment message count */
-//	counter++;
-	/* Free receive pbuf */
+	err_t err;
+	err= udp_connect(upcb, addr, port);
+	if (err == ERR_OK) {
+		/* 2. Send message to server */
+		// udpClientSend();
+		/* 3. Set a receive callback for the upcb */
+		// udp_recv(upcb, udp_receive_callback, NULL);
+	} else {
+    errorLeds(16);
+    errorLeds(16);
+  }
 	pbuf_free(p);
 }
 ///
 ///
 void udpClientConnect(void) {
-	err_t err;
+	// err_t err;
 	/* 1. Create a new UDP control block  */
 	upcb = udp_new();
 	/* Bind the block to module's IP and port */
@@ -240,13 +246,16 @@ void udpClientConnect(void) {
 	/* configure destination IP address and port */
 	ip_addr_t DestIPaddr;
 	IP_ADDR4(&DestIPaddr, 192, 168, 100, 255);
-	err= udp_connect(upcb, &DestIPaddr, udpPort);
-	if (err == ERR_OK) {
-		/* 2. Send message to server */
-		// udpClientSend();
-		/* 3. Set a receive callback for the upcb */
+	// err= udp_connect(upcb, &DestIPaddr, udpPort);
+	// if (err == ERR_OK) {
+	// 	/* 2. Send message to server */
+	// 	// udpClientSend();
+	// 	/* 3. Set a receive callback for the upcb */
 		udp_recv(upcb, udp_receive_callback, NULL);
-	}
+	// } else {
+  //   errorLeds(16);
+  //   errorLeds(16);
+  // }
 }
 ///
 ///
