@@ -14,8 +14,8 @@ STM32F7 ADC Converter using DMA (320 kHz), measured samples tranfered over Ether
 
 ## Ethernet interface
 
-- ip: static 192.168.120.173
-- client ip: static 192.168.120.173
+- ip: static 192.168.100.173
+- client ip: static 192.168.100.172
 - UDP message:
 
 | u8  | u8   | u8   | u8[1024]  |
