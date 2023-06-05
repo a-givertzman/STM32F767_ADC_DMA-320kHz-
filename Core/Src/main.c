@@ -307,8 +307,8 @@ void handleError() {
   errorLeds(e);
 }
 ///
-/// | u8  | u8   | u8   | u8[1024]  | 
-/// | SYN | ADDR | TYPE | DATA      |
+/// | u8  | u8   | u8   | u8    | u8[1024]  | 
+/// | SYN | ADDR | TYPE | count | DATA      |
 /// SYN = 22 - message starts with
 /// ADDR = 0...255 - an address of the signal
 /// TYPE
