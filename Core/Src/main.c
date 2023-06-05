@@ -57,6 +57,8 @@ uint16_t adc_buf[ADC_BUF_LEN];
 //float adcVoltage[ADC_BUF_LEN];
 struct udp_pcb *upcb;
 static struct pbuf *txBuf;
+uint8_t udp_sent_count = 0;
+uint8_t udp_received_count = 0;
 int APP_ERROR_CODE = 0;
 int APP_ERROR_COUNT = 0;
 //int counter = 8;
@@ -122,16 +124,19 @@ void errorLeds(int err) {
 }
 ///
 ///
-#define UDP_HEAD_BUF_LEN 3
+#define UDP_HEAD_BUF_LEN 4
 const uint8_t buf_head[UDP_HEAD_BUF_LEN] = {
   UDP_SYN, 
   CHAN_ADDR, 
   UDP_TYPE_ARRAY,
+  0,
 };
 ///
 /// 
 static void udpClientSend(void) {
+  pbuf_take_at(txBuf, udp_sent_count, 1, 3);
   err_t err = udp_send(upcb, txBuf);
+  udp_sent_count++;
   if (err != ERR_OK) {
     APP_ERROR_CODE = 1;
   }
@@ -218,17 +223,33 @@ void ADC_DMAError (DMA_HandleTypeDef * hdma) {
 ///
 ///
 void udp_receive_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port) {
+  udp_received_count++;
   errorLeds(64);
 	err_t err;
-	err= udp_connect(upcb, addr, port);
-	if (err == ERR_OK) {
-		/* 2. Send message to server */
-		// udpClientSend();
-		/* 3. Set a receive callback for the upcb */
-		// udp_recv(upcb, udp_receive_callback, NULL);
-	} else {
-    errorLeds(16);
-    errorLeds(16);
+  uint8_t buf[2];
+  uint8_t udpSynBuf[2] = {UDP_SYN, UDP_EOT};
+  if (p != NULL) {
+    memcpy(&buf, p->payload, 2);
+    int synOk = memcmp(buf, udpSynBuf, 2);
+    if (synOk == 0) {
+      udp_received_count = 0;
+      errorLeds(64);
+      errorLeds(64);
+      errorLeds(64);
+      err= udp_connect(upcb, addr, port);
+      if (err == ERR_OK) {
+        /* 2. Send message to server */
+        // udpClientSend();
+        /* 3. Set a receive callback for the upcb */
+        // udp_recv(upcb, udp_receive_callback, NULL);
+      } else {
+        errorLeds(16);
+        errorLeds(16);
+      }
+    } else {
+      errorLeds(16);
+      errorLeds(16);
+    }
   }
 	pbuf_free(p);
 }
