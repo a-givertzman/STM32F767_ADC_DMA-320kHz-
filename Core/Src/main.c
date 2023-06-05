@@ -134,7 +134,7 @@ const uint8_t buf_head[UDP_HEAD_BUF_LEN] = {
 ///
 /// 
 static void udpClientSend(void) {
-  pbuf_take_at(txBuf, udp_sent_count, 1, 3);
+  pbuf_take_at(txBuf, &udp_sent_count, 1, 3);
   err_t err = udp_send(upcb, txBuf);
   udp_sent_count++;
   if (err != ERR_OK) {
@@ -232,6 +232,7 @@ void udp_receive_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, const
     memcpy(&buf, p->payload, 2);
     int synOk = memcmp(buf, udpSynBuf, 2);
     if (synOk == 0) {
+      udp_sent_count = 0;
       udp_received_count = 0;
       errorLeds(64);
       errorLeds(64);
