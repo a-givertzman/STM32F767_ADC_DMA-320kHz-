@@ -37,6 +37,16 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+#define false 0;
+#define true 1;
+enum {
+  ERROR_RED = 255, 
+  WARNING_RED_BLUE = 64, 
+  WARNING_RED_GREEN = 32,
+  INFO1_BLUE = 16, 
+  INFO2_GREEN = 8,
+  INFO3_BLUE_GREEN = 4,
+};
 #define UDP_SYN 22
 #define UDP_EOT 4
 #define CHAN_ADDR 3
@@ -51,16 +61,28 @@ extern struct netif gnetif;
 #define ADC_BUF_HALF_LEN ADC_BUF_LEN / 2
 #define UDP_BUF_HALF_LEN ADC_BUF_LEN
 #define UDP_BUF_LEN (ADC_BUF_LEN * 2)
+#define UDP_HEAD_BUF_LEN 4
+uint8_t buf_head[UDP_HEAD_BUF_LEN] = {
+  UDP_SYN, 
+  CHAN_ADDR, 
+  UDP_TYPE_ARRAY,
+  0,
+};
 // uint8_t udp_buf[UDP_BUF_LEN];
 uint16_t adc_buf[ADC_BUF_LEN];
 // uint16_t adc_buf_test[ADC_BUF_LEN];
 //float adcVoltage[ADC_BUF_LEN];
-struct udp_pcb *upcb;
-static struct pbuf *txBuf;
+struct udp_pcb *upcb = NULL;
+static struct pbuf *txBuf = NULL;
 uint8_t udp_sent_count = 0;
 uint8_t udp_received_count = 0;
 int APP_ERROR_CODE = 0;
 int APP_ERROR_COUNT = 0;
+u8_t isConnected = false;
+u8_t connect = false;
+u8_t connectCount = 0;
+ip_addr_t remoteAddr;
+u16_t remotePort = 0;
 //int counter = 8;
 /* USER CODE END PTD */
 
@@ -91,55 +113,93 @@ void SystemClock_Config(void);
 ///
 void errorLeds(int err) {
   int count = 2;
-  int duration = 24;  // milles
+  int duration = 32;  // milles
   // ERROR
-  if (err > 0 && err <= 15) {
+  if (err == ERROR_RED) {
     for (uint16_t i = 0; i < count; i++) {
       HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
       HAL_Delay(duration);
     }
   }
-  // WARNING
-  if (err > 15 && err <= 31) {
+  // WARNING RED_BLUE
+  if (err == WARNING_RED_BLUE) {
     for (uint16_t i = 0; i < count; i++) {
       HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
       HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  //LED_BLUE
       HAL_Delay(duration);
     }
   }
+  // WARNING RED_GREEN
+  if (err == WARNING_RED_GREEN) {
+    for (uint16_t i = 0; i < count; i++) {
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);  //LED_GREEN
+      HAL_Delay(duration);
+    }
+  }
   // INFO1
-  if (err > 31 && err <= 63) {
+  if (err == INFO1_BLUE) {
     for (uint16_t i = 0; i < count; i++) {
       HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  //LED_BLUE
       HAL_Delay(duration);
     }
   }
   // INFO2
-  if (err > 63 && err <= 127) {
+  if (err == INFO2_GREEN) {
     for (uint16_t i = 0; i < count; i++) {
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);  //LED_GREEN
+      HAL_Delay(duration);
+    }
+  }
+  // INFO3
+  if (err == INFO3_BLUE_GREEN) {
+    for (uint16_t i = 0; i < count; i++) {
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);  //LED_BLUE
       HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);  //LED_GREEN
       HAL_Delay(duration);
     }
   }
 }
 ///
-///
-#define UDP_HEAD_BUF_LEN 4
-const uint8_t buf_head[UDP_HEAD_BUF_LEN] = {
-  UDP_SYN, 
-  CHAN_ADDR, 
-  UDP_TYPE_ARRAY,
-  0,
-};
-///
 /// 
 static void udpClientSend(void) {
-  pbuf_take_at(txBuf, &udp_sent_count, 1, 3);
-  err_t err = udp_send(upcb, txBuf);
-  udp_sent_count++;
-  if (err != ERR_OK) {
-    APP_ERROR_CODE = 1;
+  buf_head[3] = udp_sent_count;
+  err_t err = pbuf_take_at(txBuf, &buf_head, UDP_HEAD_BUF_LEN, 0);
+  // err_t err = pbuf_take_at(txBuf, &udp_sent_count, 1, 3);
+  if (err == ERR_OK) {
+    err = udp_send(upcb, txBuf);
+    udp_sent_count++;
+    if (err != ERR_OK) {
+      APP_ERROR_CODE = WARNING_RED_BLUE;//WARNING_RED_GREEN;
+    }
+  } else {
+      APP_ERROR_CODE = WARNING_RED_GREEN;
   }
+}
+///
+///
+void txBufClear(void) {
+  if (txBuf != NULL) {
+  	pbuf_free(txBuf);
+  }
+}
+///
+/// | u8  | u8   | u8   | u8    | u8[1024]  | 
+/// | SYN | ADDR | TYPE | count | DATA      |
+/// SYN = 22 - message starts with
+/// ADDR = 0...255 - an address of the signal
+/// TYPE
+///       8 - 1 byte integer value
+///       16 - 2 byte float value
+///       32 - u16[1024] an array of 2 byte values of length 512
+err_t txBufPrepare(void) {
+	txBuf = pbuf_alloc(PBUF_TRANSPORT, UDP_BUF_HALF_LEN + UDP_HEAD_BUF_LEN, PBUF_RAM);
+  err_t err = pbuf_take_at(txBuf, &buf_head, UDP_HEAD_BUF_LEN, 0);
+  if (err != ERR_OK) {
+    errorLeds(WARNING_RED_GREEN);
+    // APP_ERROR_CODE = WARNING_RED_BLUE;
+  }
+  return err;
 }
 /// 
 ///  
@@ -150,7 +210,7 @@ static void buildBuferHalf(uint8_t half) {
   } else {
     buf = &(adc_buf[ADC_BUF_HALF_LEN]);
   }
-	if (txBuf != NULL) {
+	if (isConnected && txBuf != NULL) {
 		pbuf_take_at(
       txBuf, 
       buf,
@@ -160,15 +220,15 @@ static void buildBuferHalf(uint8_t half) {
 	  // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
 		udpClientSend();
 	  // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_10); //PC10_out
-	}
+    if (connect) {
+      isConnected = false;
+    }
+  }
 }
 ///
 ///
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
 	if (hadc->Instance == ADC1) {
-    // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
-    // delayTick(500);
-    // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
 	  buildBuferHalf(1);
 	}
 }
@@ -176,9 +236,6 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
 ///
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 	if (hadc->Instance == ADC1) {
-    // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
-    // delayTick(500);
-    // HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11); //PC11_out
 	  buildBuferHalf(2);
 	}
 }
@@ -192,7 +249,7 @@ void delayTick(int16_t ticks) {
 ///
 ///
 void softReset(void) {
-  errorLeds(1);
+  errorLeds(ERROR_RED);
   NVIC_SystemReset();
   while (1) {}
 }
@@ -209,14 +266,14 @@ void softReset(void) {
 ///
 ///
 void HAL_ADC_ErrorCallback (ADC_HandleTypeDef * hadc) {
-  APP_ERROR_CODE = 16;
+  APP_ERROR_CODE = WARNING_RED_BLUE;
   HAL_ADC_Stop_DMA(&hadc1);
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
 }
 ///
 ///
 void ADC_DMAError (DMA_HandleTypeDef * hdma) {
-  APP_ERROR_CODE = 32;
+  APP_ERROR_CODE = WARNING_RED_GREEN;
   HAL_ADC_Stop_DMA(&hadc1);
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
 }
@@ -224,32 +281,31 @@ void ADC_DMAError (DMA_HandleTypeDef * hdma) {
 ///
 void udp_receive_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port) {
   udp_received_count++;
-  errorLeds(64);
-	err_t err;
+  errorLeds(INFO2_GREEN);
+	// err_t err;
   uint8_t buf[2];
   uint8_t udpSynBuf[2] = {UDP_SYN, UDP_EOT};
   if (p != NULL) {
-    memcpy(&buf, p->payload, 2);
+    memcpy(buf, p->payload, 2);
     int synOk = memcmp(buf, udpSynBuf, 2);
     if (synOk == 0) {
+      // isConnected = false;
       udp_sent_count = 0;
       udp_received_count = 0;
-      errorLeds(64);
-      errorLeds(64);
-      errorLeds(64);
-      err= udp_connect(upcb, addr, port);
-      if (err == ERR_OK) {
-        /* 2. Send message to server */
-        // udpClientSend();
-        /* 3. Set a receive callback for the upcb */
-        // udp_recv(upcb, udp_receive_callback, NULL);
-      } else {
-        errorLeds(16);
-        errorLeds(16);
-      }
+      remoteAddr = *addr;
+      remotePort = port;
+      connect = true;
+      // txBufClear();
+      // txBufPrepare();
+
+      // err= udp_connect(upcb, addr, port);
+      // APP_ERROR_CODE = INFO2_GREEN;
+      // isConnected = true;
+      // if (err != ERR_OK) {
+      //   APP_ERROR_CODE = WARNING_RED_BLUE;
+      // }
     } else {
-      errorLeds(16);
-      errorLeds(16);
+      APP_ERROR_CODE = WARNING_RED_BLUE;
     }
   }
 	pbuf_free(p);
@@ -275,15 +331,15 @@ void udpClientConnect(void) {
 	// 	/* 3. Set a receive callback for the upcb */
 		udp_recv(upcb, udp_receive_callback, NULL);
 	// } else {
-  //   errorLeds(16);
-  //   errorLeds(16);
+  //   errorLeds(WARNING_RED_BLUE);
+  //   errorLeds(WARNING_RED_BLUE);
   // }
 }
 ///
 ///
 void testLeds(int count) {
   if (count <= 0) {count = 1;};
-  int duration = 24;  // milles
+  int duration = 64;  // milles
   for (uint16_t i = 0; i < count; i++) {
     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
     HAL_Delay(duration);
@@ -300,25 +356,14 @@ void testLeds(int count) {
 ///
 void handleError() {
   int e = APP_ERROR_CODE;
-  APP_ERROR_COUNT++;
-  if (APP_ERROR_COUNT > 3) {
-    softReset();
-  }
   APP_ERROR_CODE = 0;
+  if (e >= 255) {
+    APP_ERROR_COUNT++;
+    if (APP_ERROR_COUNT > 3) {
+      softReset();
+    }
+  }
   errorLeds(e);
-}
-///
-/// | u8  | u8   | u8   | u8    | u8[1024]  | 
-/// | SYN | ADDR | TYPE | count | DATA      |
-/// SYN = 22 - message starts with
-/// ADDR = 0...255 - an address of the signal
-/// TYPE
-///       8 - 1 byte integer value
-///       16 - 2 byte float value
-///       32 - u16[1024] an array of 2 byte values of length 512
-void prepareTxBuf(void) {
-	txBuf = pbuf_alloc(PBUF_TRANSPORT, UDP_BUF_HALF_LEN + UDP_HEAD_BUF_LEN, PBUF_RAM);
-  pbuf_take_at(txBuf, &buf_head, UDP_HEAD_BUF_LEN, 0);
 }
 /* USER CODE END 0 */
 
@@ -359,12 +404,14 @@ int main(void)
   MX_TIM1_Init();
   MX_LWIP_Init();
   /* USER CODE BEGIN 2 */
-  prepareTxBuf();
-  testLeds(2);
+  // testLeds(2);
   udpClientConnect();
+  txBufPrepare();
+  testLeds(1);
+  HAL_Delay(64);
   HAL_TIM_Base_Start_IT(&htim1);
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
-  testLeds(1);
+  APP_ERROR_CODE = INFO3_BLUE_GREEN;
   // for (uint16_t i = 0; i < ADC_BUF_LEN; i++) {
   //     adc_buf_test[i] = i;
   // }  
@@ -372,11 +419,44 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+  while (1) {
 //	  HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
     if (APP_ERROR_CODE > 0) {
       handleError();
+    }
+    if (connect) {
+      if (!isConnected) {
+        HAL_Delay(64);
+        // testLeds(2);
+        errorLeds(INFO3_BLUE_GREEN);
+        errorLeds(INFO3_BLUE_GREEN);
+        errorLeds(INFO3_BLUE_GREEN);
+        txBufClear();
+        err_t err = txBufPrepare();
+        if (err == ERR_OK) {
+          HAL_Delay(64);
+          // udp_disconnect(upcb);
+          // upcb->remote_ip != NULL
+          err_t err = udp_connect(upcb, &remoteAddr, remotePort);
+          if (err == ERR_OK) {
+            // APP_ERROR_CODE = INFO2_GREEN;
+            errorLeds(INFO2_GREEN);
+            connect = false;
+            isConnected = true;
+          } else {
+            errorLeds(WARNING_RED_BLUE);
+            // APP_ERROR_CODE = WARNING_RED_GREEN;
+          }
+        } else {
+          errorLeds(WARNING_RED_GREEN);
+          // APP_ERROR_CODE = WARNING_RED_BLUE;
+        }
+        connectCount--;
+        if (connectCount < 1) {
+          connectCount = 3;
+          connect = false;
+        }
+      }
     }
 	  ethernetif_input(&gnetif);
 	  sys_check_timeouts();
