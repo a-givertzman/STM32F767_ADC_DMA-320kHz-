@@ -82,9 +82,7 @@ struct DpResult dpWriteSetpoint(int newSetpoint){
     }
 
     return dpResult;
-
 }
-
 
 int main(void){
 
