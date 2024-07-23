@@ -57,6 +57,7 @@ enum {
 };
 
 extern struct netif gnetif;
+#define ADC_COUNT 2
 #define ADC_BUF_LEN 1024
 #define ADC_BUF_HALF_LEN ADC_BUF_LEN / 2
 #define UDP_BUF_HALF_LEN ADC_BUF_LEN
@@ -203,7 +204,7 @@ err_t txBufPrepare(void) {
 }
 /// 
 ///  
-static void buildBuferHalf(uint8_t half) {
+static void buildBuferHalf(adc_buf, uint8_t half) {
   uint16_t *buf;
   if (half == 1) {
     buf = &(adc_buf[0]);
@@ -229,15 +230,19 @@ static void buildBuferHalf(uint8_t half) {
 ///
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
 	if (hadc->Instance == ADC1) {
-	  buildBuferHalf(1);
+	  buildBuferHalf(adc_buf[0], 1);
+	} else if (hadc->Instance == ADC1) {
+	  buildBuferHalf(adc_buf[1], 1);
 	}
 }
 ///
 ///
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 	if (hadc->Instance == ADC1) {
-	  buildBuferHalf(2);
-	}
+	  buildBuferHalf(adc_buf[0], 2);
+	} else if (hadc->Instance == ADC1) {
+	  buildBuferHalf(adc_buf[1], 2);
+  }
 }
 ///
 ///
@@ -410,7 +415,11 @@ int main(void)
   testLeds(1);
   HAL_Delay(64);
   HAL_TIM_Base_Start_IT(&htim1);
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
+  if (ADC_COUNT >= 1) {
+    HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf[1], ADC_BUF_LEN);
+  } else if (ADC_COUNT >= 2)
+    HAL_ADC_Start_DMA(&hadc2, (uint32_t*)&adc_buf[2], ADC_BUF_LEN);
+  }
   APP_ERROR_CODE = INFO3_BLUE_GREEN;
   // for (uint16_t i = 0; i < ADC_BUF_LEN; i++) {
   //     adc_buf_test[i] = i;
