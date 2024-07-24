@@ -69,8 +69,34 @@ uint8_t buf_head[UDP_HEAD_BUF_LEN] = {
   UDP_TYPE_ARRAY,
   0,
 };
+ADC_HandleTypeDef arrhadc[ADC_COUNT];
+#if defined(hadc1)
+  hadc[0] = hadc1;
+#endif
+#if defined(hadc2)
+  hadc[1] = hadc2;
+#endif
+#if defined(hadc3)
+  hadc[2] = hadc3;
+#endif
+#if defined(hadc4)
+  hadc[3] = hadc4;
+#endif
+#if defined(hadc5)
+  hadc[4] = hadc5;
+#endif
+#if defined(hadc6)
+  hadc[5] = hadc6;
+#endif
+#if defined(hadc7)
+  hadc[6] = hadc7;
+#endif
+#if defined(hadc8)
+  hadc[7] = hadc8;
+#endif
 // uint8_t udp_buf[UDP_BUF_LEN];
 uint16_t adc_buf[ADC_BUF_LEN];
+uint16_t adc_bufs[ADC_COUNT];
 // uint16_t adc_buf_test[ADC_BUF_LEN];
 //float adcVoltage[ADC_BUF_LEN];
 struct udp_pcb *upcb = NULL;
@@ -204,7 +230,7 @@ err_t txBufPrepare(void) {
 }
 /// 
 ///  
-static void buildBuferHalf(adc_buf, uint8_t half) {
+static void buildBuferHalf(uint8_t adc_buf[], uint8_t half) {
   uint16_t *buf;
   if (half == 1) {
     buf = &(adc_buf[0]);
@@ -228,21 +254,106 @@ static void buildBuferHalf(adc_buf, uint8_t half) {
 }
 ///
 ///
-void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) {
-	if (hadc->Instance == ADC1) {
-	  buildBuferHalf(adc_buf[0], 1);
-	} else if (hadc->Instance == ADC1) {
-	  buildBuferHalf(adc_buf[1], 1);
-	}
+void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc) { //switch case
+
+  #if defined(ADC1)
+    if (hadc->Instance == ADC1) {
+	    buildBuferHalf(adc_bufs[0], 1);
+    }
+  #endif
+
+  #if defined(ADC2)
+    if (hadc->Instance == ADC2){
+	    buildBuferHalf(adc_bufs[1], 1);
+    }
+  #endif
+
+  #if defined(ADC3)
+    if (hadc->Instance == ADC3) {
+	    buildBuferHalf(adc_bufs[2], 1);
+    }
+  #endif
+
+  #if defined(ADC4)
+    if (hadc->Instance == ADC4) {
+	    buildBuferHalf(adc_bufs[3], 1);
+    }
+  #endif
+
+  #if defined(ADC5)
+    if (hadc->Instance == ADC5) {
+	    buildBuferHalf(adc_bufs[4], 1);
+    }
+  #endif
+
+  #if defined(ADC6)
+    if (hadc->Instance == ADC6) {
+	    buildBuferHalf(adc_bufs[5], 1);
+    }
+  #endif
+
+  #if defined(ADC7)
+    if (hadc->Instance == ADC7) {
+	    buildBuferHalf(adc_bufs[6], 1);
+    }
+  #endif
+
+  #if defined(ADC8)
+    if (hadc->Instance == ADC8) {
+	    buildBuferHalf(adc_bufs[7], 1);
+    }
+  #endif
 }
 ///
 ///
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
-	if (hadc->Instance == ADC1) {
-	  buildBuferHalf(adc_buf[0], 2);
-	} else if (hadc->Instance == ADC1) {
-	  buildBuferHalf(adc_buf[1], 2);
-  }
+   #if defined(ADC1)
+    if (hadc->Instance == ADC1) {
+	    buildBuferHalf(adc_bufs[0], 2);
+    }
+  #endif
+
+  #if defined(ADC2)
+    if (hadc->Instance == ADC2){
+	    buildBuferHalf(adc_bufs[1], 2);
+    }
+  #endif
+
+  #if defined(ADC3)
+    if (hadc->Instance == ADC3) {
+	    buildBuferHalf(adc_bufs[2], 2);
+    }
+  #endif
+
+  #if defined(ADC4)
+    if (hadc->Instance == ADC4) {
+	    buildBuferHalf(adc_bufs[3], 2);
+    }
+  #endif
+
+  #if defined(ADC5)
+    if (hadc->Instance == ADC5) {
+	    buildBuferHalf(adc_bufs[4], 2);
+    }
+  #endif
+
+  #if defined(ADC6)
+    if (hadc->Instance == ADC6) {
+	    buildBuferHalf(adc_bufs[5], 2);
+    }
+  #endif
+
+  #if defined(ADC7)
+    if (hadc->Instance == ADC7) {
+	    buildBuferHalf(adc_bufs[6], 2);
+    }
+  #endif
+
+  #if defined(ADC8)
+    if (hadc->Instance == ADC8) {
+	    buildBuferHalf(adc_bufs[7], 2);
+    }
+  #endif
 }
 ///
 ///
@@ -272,15 +383,19 @@ void softReset(void) {
 ///
 void HAL_ADC_ErrorCallback (ADC_HandleTypeDef * hadc) {
   APP_ERROR_CODE = WARNING_RED_BLUE;
-  HAL_ADC_Stop_DMA(&hadc1);
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
+  for(int i = 0; i < ADC_COUNT; i++){
+    HAL_ADC_Stop_DMA(&arrhadc[i]);
+    HAL_ADC_Start_DMA(&arrhadc[i], (uint32_t*)&adc_bufs[i], ADC_BUF_LEN); 
+  }
 }
 ///
 ///
 void ADC_DMAError (DMA_HandleTypeDef * hdma) {
   APP_ERROR_CODE = WARNING_RED_GREEN;
-  HAL_ADC_Stop_DMA(&hadc1);
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
+  for(int i = 0; i < ADC_COUNT; i++){
+    HAL_ADC_Stop_DMA(&arrhadc[i]);
+    HAL_ADC_Start_DMA(&arrhadc[i], (uint32_t*)&adc_bufs[i], ADC_BUF_LEN); 
+  }
 }
 ///
 ///
@@ -415,11 +530,11 @@ int main(void)
   testLeds(1);
   HAL_Delay(64);
   HAL_TIM_Base_Start_IT(&htim1);
-  if (ADC_COUNT >= 1) {
-    HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf[1], ADC_BUF_LEN);
-  } else if (ADC_COUNT >= 2)
-    HAL_ADC_Start_DMA(&hadc2, (uint32_t*)&adc_buf[2], ADC_BUF_LEN);
+
+  for(int i = 0; i < ADC_COUNT; i++){
+    HAL_ADC_Start_DMA(&arrhadc[i], (uint32_t*)&adc_bufs[i], ADC_BUF_LEN);
   }
+
   APP_ERROR_CODE = INFO3_BLUE_GREEN;
   // for (uint16_t i = 0; i < ADC_BUF_LEN; i++) {
   //     adc_buf_test[i] = i;
