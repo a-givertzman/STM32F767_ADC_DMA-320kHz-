@@ -35,16 +35,6 @@ Message in the UDP has fallowing fiels
 - `COUNT` - length of the array in the `DATA` field
 - `DATA` - array of values of type specified in the `TYPE` field
 
-| u8  | u8   | u8   | u8[1024]  |
-|-----|------|------|-----------|
-| SYN | ADDR | TYPE | DATA      |
-    SYN = 22 - message starts with
-    ADDR = 0...255 - an address of the signal
-    TYPE
-        8 - 1 byte integer value
-        16 - 2 byte float value
-        32 - u16[512] an array of 2 byte values of length 512
-
 - UDP message sent in 140 us
 
 ## Compile & run
