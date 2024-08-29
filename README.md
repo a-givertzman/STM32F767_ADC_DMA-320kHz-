@@ -28,7 +28,7 @@ Message in the UDP has fallowing fiels
 |Example value:| 22  | 0    | 16   | 1024  | [u16; 1024] |
 - `SYN` = 22 - message starts with
 - `ADDR` = 0...255 - an address of the signal (0 - first input channel)
-- `TYPE`
+- `TYPE` - type of values in the array in `DATA` field
   - 8 - 1 byte integer value
   - 16 - 2 byte float value
   - 32 - u16[1024] an array of 2 byte values of length 512
