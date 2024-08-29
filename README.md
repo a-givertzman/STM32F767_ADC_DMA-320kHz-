@@ -18,6 +18,23 @@ STM32F7 ADC Converter using DMA (320 kHz), measured samples tranfered over Ether
 - client ip: static 192.168.100.172
 - UDP message:
 
+### UDP protocol description
+
+Message in the UDP has fallowing fiels
+
+|Field name:   | SYN | ADDR | TYPE | COUNT | DATA        |
+|---           | --- | ---- | ---- | ----- | ----        |
+|Data type:    | u8  | u8   | u8   | u8    | u8[1024]    | 
+|Example value:| 22  | 0    | 16   | 1024  | [u16; 1024] |
+- `SYN` = 22 - message starts with
+- `ADDR` = 0...255 - an address of the signal (0 - first input channel)
+- `TYPE`
+  - 8 - 1 byte integer value
+  - 16 - 2 byte float value
+  - 32 - u16[1024] an array of 2 byte values of length 512
+- `COUNT` - length of the array in the `DATA` field
+- `DATA` - array of values of type specified in the `TYPE` field
+
 | u8  | u8   | u8   | u8[1024]  |
 |-----|------|------|-----------|
 | SYN | ADDR | TYPE | DATA      |
