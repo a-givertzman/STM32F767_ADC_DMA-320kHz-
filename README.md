@@ -24,7 +24,7 @@ Message in the UDP has fallowing fiels
 
 |Field name:   | SYN | ADDR | TYPE | COUNT | DATA        |
 |---           | --- | ---- | ---- | ----- | ----        |
-|Data type:    | u8  | u8   | u8   | u8    | u8[1024]    | 
+|Data type:    | u8  | u8   | u8   | u32   | u8[1024]    | 
 |Example value:| 22  | 0    | 16   | 1024  | [u16; 1024] |
 - `SYN` = 22 - message starts with
 - `ADDR` = 0...255 - an address of the signal (0 - first input channel)
