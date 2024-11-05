@@ -8,7 +8,7 @@ struct DpResult{
     int setpoint;
 };
 
-void initSPI(){ //что-то с cnf
+void initSPI(){
     RCC->APB2ENR |= RCC_APB2ENR_SPI1EN; // Включаем тактовый сигнал для SPI1
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN; //Включаем тактовый сигнал для GPIOA
 
@@ -82,9 +82,7 @@ struct DpResult dpWriteSetpoint(int newSetpoint){
     }
 
     return dpResult;
-
 }
-
 
 int main(void){
 
