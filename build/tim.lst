@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc1wux2y.s 			page 1
+ARM GAS  /tmp/ccVpEsZW.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -18,15 +18,15 @@ ARM GAS  /tmp/cc1wux2y.s 			page 1
   15              		.text
   16              	.Ltext0:
   17              		.cfi_sections	.debug_frame
-  18              		.section	.text.MX_TIM1_Init,"ax",%progbits
-  19              		.align	1
-  20              		.global	MX_TIM1_Init
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  25              	MX_TIM1_Init:
-  26              	.LFB141:
-  27              		.file 1 "Core/Src/tim.c"
+  18              		.file 1 "Core/Src/tim.c"
+  19              		.section	.text.MX_TIM1_Init,"ax",%progbits
+  20              		.align	1
+  21              		.global	MX_TIM1_Init
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	MX_TIM1_Init:
+  27              	.LFB141:
    1:Core/Src/tim.c **** /* USER CODE BEGIN Header */
    2:Core/Src/tim.c **** /**
    3:Core/Src/tim.c ****   ******************************************************************************
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc1wux2y.s 			page 1
   29:Core/Src/tim.c **** /* TIM1 init function */
   30:Core/Src/tim.c **** void MX_TIM1_Init(void)
   31:Core/Src/tim.c **** {
-ARM GAS  /tmp/cc1wux2y.s 			page 2
+ARM GAS  /tmp/ccVpEsZW.s 			page 2
 
 
   28              		.loc 1 31 1 view -0
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc1wux2y.s 			page 1
   47:Core/Src/tim.c ****   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   67              		.loc 1 47 3 is_stmt 1 view .LVU13
   68              		.loc 1 47 28 is_stmt 0 view .LVU14
-ARM GAS  /tmp/cc1wux2y.s 			page 3
+ARM GAS  /tmp/ccVpEsZW.s 			page 3
 
 
   69 0024 0361     		str	r3, [r0, #16]
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc1wux2y.s 			page 1
  108              		.loc 1 62 7 is_stmt 0 view .LVU34
  109 004a 01A9     		add	r1, sp, #4
  110 004c 0748     		ldr	r0, .L9
-ARM GAS  /tmp/cc1wux2y.s 			page 4
+ARM GAS  /tmp/ccVpEsZW.s 			page 4
 
 
  111 004e FFF7FEFF 		bl	HAL_TIMEx_MasterConfigSynchronization
@@ -225,7 +225,7 @@ ARM GAS  /tmp/cc1wux2y.s 			page 1
  141              	.L10:
  142              		.align	2
  143              	.L9:
- 144 006c 00000000 		.word	.LANCHOR0
+ 144 006c 00000000 		.word	htim1
  145 0070 00000140 		.word	1073807360
  146              		.cfi_endproc
  147              	.LFE141:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc1wux2y.s 			page 1
  156              	HAL_TIM_Base_MspInit:
  157              	.LVL6:
  158              	.LFB142:
-ARM GAS  /tmp/cc1wux2y.s 			page 5
+ARM GAS  /tmp/ccVpEsZW.s 			page 5
 
 
   71:Core/Src/tim.c **** 
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc1wux2y.s 			page 1
  198 0026 1146     		mov	r1, r2
  199 0028 1820     		movs	r0, #24
  200              	.LVL7:
-ARM GAS  /tmp/cc1wux2y.s 			page 6
+ARM GAS  /tmp/ccVpEsZW.s 			page 6
 
 
  201              		.loc 1 84 5 is_stmt 0 view .LVU53
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc1wux2y.s 			page 1
  246              		.thumb_func
  248              	HAL_TIM_Base_MspDeInit:
  249              	.LVL14:
-ARM GAS  /tmp/cc1wux2y.s 			page 7
+ARM GAS  /tmp/ccVpEsZW.s 			page 7
 
 
  250              	.LFB143:
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc1wux2y.s 			page 1
  281              	.LVL17:
  108:Core/Src/tim.c ****     HAL_NVIC_DisableIRQ(TIM1_UP_TIM10_IRQn);
  282              		.loc 1 108 5 is_stmt 0 view .LVU68
-ARM GAS  /tmp/cc1wux2y.s 			page 8
+ARM GAS  /tmp/ccVpEsZW.s 			page 8
 
 
  283 0018 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
@@ -445,41 +445,39 @@ ARM GAS  /tmp/cc1wux2y.s 			page 1
  303              		.global	htim1
  304              		.section	.bss.htim1,"aw",%nobits
  305              		.align	2
- 306              		.set	.LANCHOR0,. + 0
- 309              	htim1:
- 310 0000 00000000 		.space	76
- 310      00000000 
- 310      00000000 
- 310      00000000 
- 310      00000000 
- 311              		.text
- 312              	.Letext0:
- 313              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
- 314              		.file 3 "/home/lobanov/st/stm32cubeclt_1.12.1/GNU-tools-for-STM32/arm-none-eabi/include/machine/_d
- 315              		.file 4 "/home/lobanov/st/stm32cubeclt_1.12.1/GNU-tools-for-STM32/arm-none-eabi/include/sys/_stdin
- 316              		.file 5 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
- 317              		.file 6 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
- 318              		.file 7 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h"
- 319              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_cortex.h"
- 320              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h"
- 321              		.file 10 "Core/Inc/tim.h"
- 322              		.file 11 "Core/Inc/main.h"
-ARM GAS  /tmp/cc1wux2y.s 			page 9
+ 308              	htim1:
+ 309 0000 00000000 		.space	76
+ 309      00000000 
+ 309      00000000 
+ 309      00000000 
+ 309      00000000 
+ 310              		.text
+ 311              	.Letext0:
+ 312              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
+ 313              		.file 3 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdint.h"
+ 314              		.file 4 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
+ 315              		.file 5 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
+ 316              		.file 6 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h"
+ 317              		.file 7 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_cortex.h"
+ 318              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h"
+ 319              		.file 9 "Core/Inc/tim.h"
+ 320              		.file 10 "Core/Inc/main.h"
+ARM GAS  /tmp/ccVpEsZW.s 			page 9
 
 
 DEFINED SYMBOLS
-                            *ABS*:0000000000000000 tim.c
-     /tmp/cc1wux2y.s:19     .text.MX_TIM1_Init:0000000000000000 $t
-     /tmp/cc1wux2y.s:25     .text.MX_TIM1_Init:0000000000000000 MX_TIM1_Init
-     /tmp/cc1wux2y.s:144    .text.MX_TIM1_Init:000000000000006c $d
-     /tmp/cc1wux2y.s:150    .text.HAL_TIM_Base_MspInit:0000000000000000 $t
-     /tmp/cc1wux2y.s:156    .text.HAL_TIM_Base_MspInit:0000000000000000 HAL_TIM_Base_MspInit
-     /tmp/cc1wux2y.s:237    .text.HAL_TIM_Base_MspInit:000000000000005c $d
-     /tmp/cc1wux2y.s:242    .text.HAL_TIM_Base_MspDeInit:0000000000000000 $t
-     /tmp/cc1wux2y.s:248    .text.HAL_TIM_Base_MspDeInit:0000000000000000 HAL_TIM_Base_MspDeInit
-     /tmp/cc1wux2y.s:298    .text.HAL_TIM_Base_MspDeInit:000000000000002c $d
-     /tmp/cc1wux2y.s:309    .bss.htim1:0000000000000000 htim1
-     /tmp/cc1wux2y.s:305    .bss.htim1:0000000000000000 $d
+                            *ABS*:00000000 tim.c
+     /tmp/ccVpEsZW.s:20     .text.MX_TIM1_Init:00000000 $t
+     /tmp/ccVpEsZW.s:26     .text.MX_TIM1_Init:00000000 MX_TIM1_Init
+     /tmp/ccVpEsZW.s:144    .text.MX_TIM1_Init:0000006c $d
+     /tmp/ccVpEsZW.s:308    .bss.htim1:00000000 htim1
+     /tmp/ccVpEsZW.s:150    .text.HAL_TIM_Base_MspInit:00000000 $t
+     /tmp/ccVpEsZW.s:156    .text.HAL_TIM_Base_MspInit:00000000 HAL_TIM_Base_MspInit
+     /tmp/ccVpEsZW.s:237    .text.HAL_TIM_Base_MspInit:0000005c $d
+     /tmp/ccVpEsZW.s:242    .text.HAL_TIM_Base_MspDeInit:00000000 $t
+     /tmp/ccVpEsZW.s:248    .text.HAL_TIM_Base_MspDeInit:00000000 HAL_TIM_Base_MspDeInit
+     /tmp/ccVpEsZW.s:298    .text.HAL_TIM_Base_MspDeInit:0000002c $d
+     /tmp/ccVpEsZW.s:305    .bss.htim1:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_TIM_Base_Init
