@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc1624hb.s 			page 1
+ARM GAS  /tmp/ccvN8gmG.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -18,16 +18,16 @@ ARM GAS  /tmp/cc1624hb.s 			page 1
   15              		.text
   16              	.Ltext0:
   17              		.cfi_sections	.debug_frame
-  18              		.section	.text.ethernet_input,"ax",%progbits
-  19              		.align	1
-  20              		.global	ethernet_input
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  25              	ethernet_input:
-  26              	.LVL0:
-  27              	.LFB167:
-  28              		.file 1 "Middlewares/Third_Party/LwIP/src/netif/ethernet.c"
+  18              		.file 1 "Middlewares/Third_Party/LwIP/src/netif/ethernet.c"
+  19              		.section	.text.ethernet_input,"ax",%progbits
+  20              		.align	1
+  21              		.global	ethernet_input
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	ethernet_input:
+  27              	.LVL0:
+  28              	.LFB166:
    1:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** /**
    2:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****  * @file
    3:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****  * Ethernet common functions
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc1624hb.s 			page 1
   28:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
   29:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****  * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
   30:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
-ARM GAS  /tmp/cc1624hb.s 			page 2
+ARM GAS  /tmp/ccvN8gmG.s 			page 2
 
 
   31:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****  * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc1624hb.s 			page 1
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 0, uses_anonymous_args = 0
   33              		.loc 1 82 1 is_stmt 0 view .LVU1
-ARM GAS  /tmp/cc1624hb.s 			page 3
+ARM GAS  /tmp/ccvN8gmG.s 			page 3
 
 
   34 0000 70B5     		push	{r4, r5, r6, lr}
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc1624hb.s 			page 1
   66              		.loc 1 104 3 is_stmt 1 view .LVU15
   67              		.loc 1 104 10 is_stmt 0 view .LVU16
   68 0018 6068     		ldr	r0, [r4, #4]
-ARM GAS  /tmp/cc1624hb.s 			page 4
+ARM GAS  /tmp/ccvN8gmG.s 			page 4
 
 
   69              	.LVL2:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc1624hb.s 			page 1
  147:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****     /* this might be a multicast or broadcast packet */
  148:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****     if (ethhdr->dest.addr[0] == LL_IP4_MULTICAST_ADDR_0) {
   81              		.loc 1 148 5 is_stmt 1 view .LVU23
-ARM GAS  /tmp/cc1624hb.s 			page 5
+ARM GAS  /tmp/ccvN8gmG.s 			page 5
 
 
   82              		.loc 1 148 8 is_stmt 0 view .LVU24
@@ -273,22 +273,23 @@ ARM GAS  /tmp/cc1624hb.s 			page 1
  165:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****       /* mark the pbuf as link-layer broadcast */
  166:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****       p->flags |= PBUF_FLAG_LLBCAST;
   95              		.loc 1 166 7 is_stmt 1 view .LVU29
-  96              		.loc 1 166 16 is_stmt 0 view .LVU30
+  96              		.loc 1 166 8 is_stmt 0 view .LVU30
   97 0032 637B     		ldrb	r3, [r4, #13]	@ zero_extendqisi2
-  98 0034 43F00803 		orr	r3, r3, #8
-  99 0038 6373     		strb	r3, [r4, #13]
- 100              	.L4:
+  98              		.loc 1 166 16 view .LVU31
+  99 0034 43F00803 		orr	r3, r3, #8
+ 100 0038 6373     		strb	r3, [r4, #13]
+ 101              	.L4:
  167:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****     }
  168:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   }
  169:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** 
  170:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   switch (type) {
- 101              		.loc 1 170 3 is_stmt 1 view .LVU31
- 102 003a 082E     		cmp	r6, #8
- 103 003c 12D0     		beq	.L6
- 104 003e B6F5C16F 		cmp	r6, #1544
- 105 0042 1FD0     		beq	.L7
- 106              	.LVL6:
- 107              	.L2:
+ 102              		.loc 1 170 3 is_stmt 1 view .LVU32
+ 103 003a 082E     		cmp	r6, #8
+ 104 003c 12D0     		beq	.L6
+ 105 003e B6F5C16F 		cmp	r6, #1544
+ 106 0042 1FD0     		beq	.L7
+ 107              	.LVL6:
+ 108              	.L2:
  171:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** #if LWIP_IPV4 && LWIP_ARP
  172:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****     /* IP packet? */
  173:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****     case PP_HTONS(ETHTYPE_IP):
@@ -297,10 +298,10 @@ ARM GAS  /tmp/cc1624hb.s 			page 1
  176:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****       }
  177:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****       /* skip Ethernet header (min. size checked above) */
  178:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****       if (pbuf_remove_header(p, next_hdr_offset)) {
+ARM GAS  /tmp/ccvN8gmG.s 			page 6
+
+
  179:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_LEVEL_WARNING,
-ARM GAS  /tmp/cc1624hb.s 			page 6
-
-
  180:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****                     ("ethernet_input: IPv4 packet dropped, too short (%"U16_F"/%"U16_F")\n",
  181:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****                      p->tot_len, next_hdr_offset));
  182:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE, ("Can't move over header in packet"));
@@ -357,10 +358,10 @@ ARM GAS  /tmp/cc1624hb.s 			page 1
  233:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** 
  234:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****     default:
  235:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** #ifdef LWIP_HOOK_UNKNOWN_ETH_PROTOCOL
+ARM GAS  /tmp/ccvN8gmG.s 			page 7
+
+
  236:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****       if (LWIP_HOOK_UNKNOWN_ETH_PROTOCOL(p, netif) == ERR_OK) {
-ARM GAS  /tmp/cc1624hb.s 			page 7
-
-
  237:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         break;
  238:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****       }
  239:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** #endif
@@ -376,152 +377,154 @@ ARM GAS  /tmp/cc1624hb.s 			page 1
  249:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** 
  250:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** free_and_return:
  251:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   pbuf_free(p);
- 108              		.loc 1 251 3 view .LVU32
- 109 0044 2046     		mov	r0, r4
- 110 0046 FFF7FEFF 		bl	pbuf_free
- 111              	.LVL7:
+ 109              		.loc 1 251 3 view .LVU33
+ 110 0044 2046     		mov	r0, r4
+ 111 0046 FFF7FEFF 		bl	pbuf_free
+ 112              	.LVL7:
  252:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   return ERR_OK;
- 112              		.loc 1 252 3 view .LVU33
- 113              	.L8:
+ 113              		.loc 1 252 3 view .LVU34
+ 114              	.L8:
  253:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** }
- 114              		.loc 1 253 1 is_stmt 0 view .LVU34
- 115 004a 0020     		movs	r0, #0
- 116 004c 70BD     		pop	{r4, r5, r6, pc}
- 117              	.LVL8:
- 118              	.L10:
+ 115              		.loc 1 253 1 is_stmt 0 view .LVU35
+ 116 004a 0020     		movs	r0, #0
+ 117 004c 70BD     		pop	{r4, r5, r6, pc}
+ 118              	.LVL8:
+ 119              	.L10:
  150:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****           (ethhdr->dest.addr[2] == LL_IP4_MULTICAST_ADDR_2)) {
- 119              		.loc 1 150 7 is_stmt 1 view .LVU35
+ 120              		.loc 1 150 7 is_stmt 1 view .LVU36
  150:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****           (ethhdr->dest.addr[2] == LL_IP4_MULTICAST_ADDR_2)) {
- 120              		.loc 1 150 29 is_stmt 0 view .LVU36
- 121 004e 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 121              		.loc 1 150 29 is_stmt 0 view .LVU37
+ 122 004e 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
  150:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****           (ethhdr->dest.addr[2] == LL_IP4_MULTICAST_ADDR_2)) {
- 122              		.loc 1 150 10 view .LVU37
- 123 0050 002B     		cmp	r3, #0
- 124 0052 F2D1     		bne	.L4
+ 123              		.loc 1 150 10 view .LVU38
+ 124 0050 002B     		cmp	r3, #0
+ 125 0052 F2D1     		bne	.L4
  151:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         /* mark the pbuf as link-layer multicast */
- 125              		.loc 1 151 29 discriminator 1 view .LVU38
- 126 0054 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 126              		.loc 1 151 29 discriminator 1 view .LVU39
+ 127 0054 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
  150:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****           (ethhdr->dest.addr[2] == LL_IP4_MULTICAST_ADDR_2)) {
- 127              		.loc 1 150 61 discriminator 1 view .LVU39
- 128 0056 5E2B     		cmp	r3, #94
- 129 0058 EFD1     		bne	.L4
+ 128              		.loc 1 150 61 discriminator 1 view .LVU40
+ 129 0056 5E2B     		cmp	r3, #94
+ 130 0058 EFD1     		bne	.L4
  153:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****       }
- 130              		.loc 1 153 9 is_stmt 1 view .LVU40
+ 131              		.loc 1 153 9 is_stmt 1 view .LVU41
  153:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****       }
- 131              		.loc 1 153 18 is_stmt 0 view .LVU41
- 132 005a 637B     		ldrb	r3, [r4, #13]	@ zero_extendqisi2
- 133 005c 43F01003 		orr	r3, r3, #16
- 134 0060 6373     		strb	r3, [r4, #13]
- 135              	.LVL9:
+ 132              		.loc 1 153 10 is_stmt 0 view .LVU42
+ 133 005a 637B     		ldrb	r3, [r4, #13]	@ zero_extendqisi2
  153:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****       }
- 136              		.loc 1 153 18 view .LVU42
- 137 0062 EAE7     		b	.L4
- 138              	.LVL10:
- 139              	.L6:
-ARM GAS  /tmp/cc1624hb.s 			page 8
+ 134              		.loc 1 153 18 view .LVU43
+ 135 005c 43F01003 		orr	r3, r3, #16
+ 136 0060 6373     		strb	r3, [r4, #13]
+ 137              	.LVL9:
+ 153:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****       }
+ 138              		.loc 1 153 18 view .LVU44
+ARM GAS  /tmp/ccvN8gmG.s 			page 8
 
 
+ 139 0062 EAE7     		b	.L4
+ 140              	.LVL10:
+ 141              	.L6:
  174:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         goto free_and_return;
- 140              		.loc 1 174 7 is_stmt 1 view .LVU43
+ 142              		.loc 1 174 7 is_stmt 1 view .LVU45
  174:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         goto free_and_return;
- 141              		.loc 1 174 18 is_stmt 0 view .LVU44
- 142 0064 95F82D30 		ldrb	r3, [r5, #45]	@ zero_extendqisi2
+ 143              		.loc 1 174 18 is_stmt 0 view .LVU46
+ 144 0064 95F82D30 		ldrb	r3, [r5, #45]	@ zero_extendqisi2
  174:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         goto free_and_return;
- 143              		.loc 1 174 10 view .LVU45
- 144 0068 13F0080F 		tst	r3, #8
- 145 006c EAD0     		beq	.L2
+ 145              		.loc 1 174 10 view .LVU47
+ 146 0068 13F0080F 		tst	r3, #8
+ 147 006c EAD0     		beq	.L2
  178:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_LEVEL_WARNING,
- 146              		.loc 1 178 7 is_stmt 1 view .LVU46
+ 148              		.loc 1 178 7 is_stmt 1 view .LVU48
  178:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_LEVEL_WARNING,
- 147              		.loc 1 178 11 is_stmt 0 view .LVU47
- 148 006e 0E21     		movs	r1, #14
- 149 0070 2046     		mov	r0, r4
- 150 0072 FFF7FEFF 		bl	pbuf_remove_header
- 151              	.LVL11:
+ 149              		.loc 1 178 11 is_stmt 0 view .LVU49
+ 150 006e 0E21     		movs	r1, #14
+ 151 0070 2046     		mov	r0, r4
+ 152 0072 FFF7FEFF 		bl	pbuf_remove_header
+ 153              	.LVL11:
  178:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_LEVEL_WARNING,
- 152              		.loc 1 178 10 view .LVU48
- 153 0076 0028     		cmp	r0, #0
- 154 0078 E4D1     		bne	.L2
+ 154              		.loc 1 178 10 view .LVU50
+ 155 0076 0028     		cmp	r0, #0
+ 156 0078 E4D1     		bne	.L2
  186:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****       }
- 155              		.loc 1 186 9 is_stmt 1 view .LVU49
- 156 007a 2946     		mov	r1, r5
- 157 007c 2046     		mov	r0, r4
- 158 007e FFF7FEFF 		bl	ip4_input
- 159              	.LVL12:
+ 157              		.loc 1 186 9 is_stmt 1 view .LVU51
+ 158 007a 2946     		mov	r1, r5
+ 159 007c 2046     		mov	r0, r4
+ 160 007e FFF7FEFF 		bl	ip4_input
+ 161              	.LVL12:
  188:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** 
- 160              		.loc 1 188 7 view .LVU50
- 161 0082 E2E7     		b	.L8
- 162              	.L7:
+ 162              		.loc 1 188 7 view .LVU52
+ 163 0082 E2E7     		b	.L8
+ 164              	.L7:
  191:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         goto free_and_return;
- 163              		.loc 1 191 7 view .LVU51
+ 165              		.loc 1 191 7 view .LVU53
  191:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         goto free_and_return;
- 164              		.loc 1 191 18 is_stmt 0 view .LVU52
- 165 0084 95F82D30 		ldrb	r3, [r5, #45]	@ zero_extendqisi2
+ 166              		.loc 1 191 18 is_stmt 0 view .LVU54
+ 167 0084 95F82D30 		ldrb	r3, [r5, #45]	@ zero_extendqisi2
  191:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         goto free_and_return;
- 166              		.loc 1 191 10 view .LVU53
- 167 0088 13F0080F 		tst	r3, #8
- 168 008c DAD0     		beq	.L2
+ 168              		.loc 1 191 10 view .LVU55
+ 169 0088 13F0080F 		tst	r3, #8
+ 170 008c DAD0     		beq	.L2
  195:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_LEVEL_WARNING,
- 169              		.loc 1 195 7 is_stmt 1 view .LVU54
+ 171              		.loc 1 195 7 is_stmt 1 view .LVU56
  195:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_LEVEL_WARNING,
- 170              		.loc 1 195 11 is_stmt 0 view .LVU55
- 171 008e 0E21     		movs	r1, #14
- 172 0090 2046     		mov	r0, r4
- 173 0092 FFF7FEFF 		bl	pbuf_remove_header
- 174              	.LVL13:
+ 172              		.loc 1 195 11 is_stmt 0 view .LVU57
+ 173 008e 0E21     		movs	r1, #14
+ 174 0090 2046     		mov	r0, r4
+ 175 0092 FFF7FEFF 		bl	pbuf_remove_header
+ 176              	.LVL13:
  195:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****         LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_LEVEL_WARNING,
- 175              		.loc 1 195 10 view .LVU56
- 176 0096 0028     		cmp	r0, #0
- 177 0098 D4D1     		bne	.L2
+ 177              		.loc 1 195 10 view .LVU58
+ 178 0096 0028     		cmp	r0, #0
+ 179 0098 D4D1     		bne	.L2
  205:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****       }
- 178              		.loc 1 205 9 is_stmt 1 view .LVU57
- 179 009a 2946     		mov	r1, r5
- 180 009c 2046     		mov	r0, r4
- 181 009e FFF7FEFF 		bl	etharp_input
-ARM GAS  /tmp/cc1624hb.s 			page 9
+ 180              		.loc 1 205 9 is_stmt 1 view .LVU59
+ARM GAS  /tmp/ccvN8gmG.s 			page 9
 
 
- 182              	.LVL14:
+ 181 009a 2946     		mov	r1, r5
+ 182 009c 2046     		mov	r0, r4
+ 183 009e FFF7FEFF 		bl	etharp_input
+ 184              	.LVL14:
  207:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** #endif /* LWIP_IPV4 && LWIP_ARP */
- 183              		.loc 1 207 7 view .LVU58
- 184 00a2 D2E7     		b	.L8
- 185              	.L12:
- 186              		.align	2
- 187              	.L11:
- 188 00a4 00000000 		.word	.LANCHOR0
- 189              		.cfi_endproc
- 190              	.LFE167:
- 192              		.section	.rodata.ethernet_output.str1.4,"aMS",%progbits,1
- 193              		.align	2
- 194              	.LC0:
- 195 0000 4D696464 		.ascii	"Middlewares/Third_Party/LwIP/src/netif/ethernet.c\000"
- 195      6C657761 
- 195      7265732F 
- 195      54686972 
- 195      645F5061 
- 196 0032 0000     		.align	2
- 197              	.LC1:
- 198 0034 6E657469 		.ascii	"netif->hwaddr_len must be 6 for ethernet_output!\000"
- 198      662D3E68 
- 198      77616464 
- 198      725F6C65 
- 198      6E206D75 
- 199 0065 000000   		.align	2
- 200              	.LC2:
- 201 0068 41737365 		.ascii	"Assertion \"%s\" failed at line %d in %s\012\000"
- 201      7274696F 
- 201      6E202225 
- 201      73222066 
- 201      61696C65 
- 202              		.section	.text.ethernet_output,"ax",%progbits
- 203              		.align	1
- 204              		.global	ethernet_output
- 205              		.syntax unified
- 206              		.thumb
- 207              		.thumb_func
- 209              	ethernet_output:
- 210              	.LVL15:
- 211              	.LFB168:
+ 185              		.loc 1 207 7 view .LVU60
+ 186 00a2 D2E7     		b	.L8
+ 187              	.L12:
+ 188              		.align	2
+ 189              	.L11:
+ 190 00a4 00000000 		.word	ethbroadcast
+ 191              		.cfi_endproc
+ 192              	.LFE166:
+ 194              		.section	.rodata.ethernet_output.str1.4,"aMS",%progbits,1
+ 195              		.align	2
+ 196              	.LC0:
+ 197 0000 4D696464 		.ascii	"Middlewares/Third_Party/LwIP/src/netif/ethernet.c\000"
+ 197      6C657761 
+ 197      7265732F 
+ 197      54686972 
+ 197      645F5061 
+ 198 0032 0000     		.align	2
+ 199              	.LC1:
+ 200 0034 6E657469 		.ascii	"netif->hwaddr_len must be 6 for ethernet_output!\000"
+ 200      662D3E68 
+ 200      77616464 
+ 200      725F6C65 
+ 200      6E206D75 
+ 201 0065 000000   		.align	2
+ 202              	.LC2:
+ 203 0068 41737365 		.ascii	"Assertion \"%s\" failed at line %d in %s\012\000"
+ 203      7274696F 
+ 203      6E202225 
+ 203      73222066 
+ 203      61696C65 
+ 204              		.section	.text.ethernet_output,"ax",%progbits
+ 205              		.align	1
+ 206              		.global	ethernet_output
+ 207              		.syntax unified
+ 208              		.thumb
+ 209              		.thumb_func
+ 211              	ethernet_output:
+ 212              	.LVL15:
+ 213              	.LFB167:
  254:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** 
  255:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** /**
  256:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****  * @ingroup ethernet
@@ -535,46 +538,46 @@ ARM GAS  /tmp/cc1624hb.s 			page 1
  264:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****  * @param src the source MAC address to be copied into the ethernet header
  265:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****  * @param dst the destination MAC address to be copied into the ethernet header
  266:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****  * @param eth_type ethernet type (@ref lwip_ieee_eth_type)
+ARM GAS  /tmp/ccvN8gmG.s 			page 10
+
+
  267:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****  * @return ERR_OK if the packet was sent, any other err_t on failure
  268:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****  */
  269:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** err_t
-ARM GAS  /tmp/cc1624hb.s 			page 10
-
-
  270:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** ethernet_output(struct netif * netif, struct pbuf * p,
  271:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****                 const struct eth_addr * src, const struct eth_addr * dst,
  272:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****                 u16_t eth_type) {
- 212              		.loc 1 272 33 view -0
- 213              		.cfi_startproc
- 214              		@ args = 4, pretend = 0, frame = 0
- 215              		@ frame_needed = 0, uses_anonymous_args = 0
- 216              		.loc 1 272 33 is_stmt 0 view .LVU60
- 217 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
- 218              	.LCFI1:
- 219              		.cfi_def_cfa_offset 24
- 220              		.cfi_offset 4, -24
- 221              		.cfi_offset 5, -20
- 222              		.cfi_offset 6, -16
- 223              		.cfi_offset 7, -12
- 224              		.cfi_offset 8, -8
- 225              		.cfi_offset 14, -4
- 226 0004 0546     		mov	r5, r0
- 227 0006 0C46     		mov	r4, r1
- 228 0008 1646     		mov	r6, r2
- 229 000a 1F46     		mov	r7, r3
+ 214              		.loc 1 272 33 view -0
+ 215              		.cfi_startproc
+ 216              		@ args = 4, pretend = 0, frame = 0
+ 217              		@ frame_needed = 0, uses_anonymous_args = 0
+ 218              		.loc 1 272 33 is_stmt 0 view .LVU62
+ 219 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 220              	.LCFI1:
+ 221              		.cfi_def_cfa_offset 24
+ 222              		.cfi_offset 4, -24
+ 223              		.cfi_offset 5, -20
+ 224              		.cfi_offset 6, -16
+ 225              		.cfi_offset 7, -12
+ 226              		.cfi_offset 8, -8
+ 227              		.cfi_offset 14, -4
+ 228 0004 0546     		mov	r5, r0
+ 229 0006 0C46     		mov	r4, r1
+ 230 0008 1646     		mov	r6, r2
+ 231 000a 1F46     		mov	r7, r3
  273:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   struct eth_hdr *ethhdr;
- 230              		.loc 1 273 3 is_stmt 1 view .LVU61
+ 232              		.loc 1 273 3 is_stmt 1 view .LVU63
  274:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   u16_t eth_type_be = lwip_htons(eth_type);
- 231              		.loc 1 274 3 view .LVU62
- 232              		.loc 1 274 23 is_stmt 0 view .LVU63
- 233 000c BDF81800 		ldrh	r0, [sp, #24]
- 234              	.LVL16:
- 235              		.loc 1 274 23 view .LVU64
- 236 0010 FFF7FEFF 		bl	lwip_htons
- 237              	.LVL17:
- 238              		.loc 1 274 23 view .LVU65
- 239 0014 8046     		mov	r8, r0
- 240              	.LVL18:
+ 233              		.loc 1 274 3 view .LVU64
+ 234              		.loc 1 274 23 is_stmt 0 view .LVU65
+ 235 000c BDF81800 		ldrh	r0, [sp, #24]
+ 236              	.LVL16:
+ 237              		.loc 1 274 23 view .LVU66
+ 238 0010 FFF7FEFF 		bl	lwip_htons
+ 239              	.LVL17:
+ 240              		.loc 1 274 23 view .LVU67
+ 241 0014 8046     		mov	r8, r0
+ 242              	.LVL18:
  275:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** 
  276:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** #if ETHARP_SUPPORT_VLAN && defined(LWIP_HOOK_VLAN_SET)
  277:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   s32_t vlan_prio_vid = LWIP_HOOK_VLAN_SET(netif, p, src, dst, eth_type);
@@ -595,76 +598,76 @@ ARM GAS  /tmp/cc1624hb.s 			page 1
  292:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** #endif /* ETHARP_SUPPORT_VLAN && defined(LWIP_HOOK_VLAN_SET) */
  293:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   {
  294:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****     if (pbuf_add_header(p, SIZEOF_ETH_HDR) != 0) {
- 241              		.loc 1 294 5 is_stmt 1 view .LVU66
- 242              		.loc 1 294 9 is_stmt 0 view .LVU67
- 243 0016 0E21     		movs	r1, #14
-ARM GAS  /tmp/cc1624hb.s 			page 11
+ARM GAS  /tmp/ccvN8gmG.s 			page 11
 
 
- 244 0018 2046     		mov	r0, r4
- 245 001a FFF7FEFF 		bl	pbuf_add_header
- 246              	.LVL19:
- 247              		.loc 1 294 8 view .LVU68
- 248 001e E8B9     		cbnz	r0, .L16
+ 243              		.loc 1 294 5 is_stmt 1 view .LVU68
+ 244              		.loc 1 294 9 is_stmt 0 view .LVU69
+ 245 0016 0E21     		movs	r1, #14
+ 246 0018 2046     		mov	r0, r4
+ 247 001a FFF7FEFF 		bl	pbuf_add_header
+ 248              	.LVL19:
+ 249              		.loc 1 294 8 view .LVU70
+ 250 001e E8B9     		cbnz	r0, .L16
  295:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****       goto pbuf_header_failed;
  296:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****     }
  297:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   }
  298:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** 
  299:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   LWIP_ASSERT_CORE_LOCKED();
- 249              		.loc 1 299 28 is_stmt 1 view .LVU69
+ 251              		.loc 1 299 28 is_stmt 1 view .LVU71
  300:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** 
  301:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   ethhdr = (struct eth_hdr *)p->payload;
- 250              		.loc 1 301 3 view .LVU70
- 251              		.loc 1 301 10 is_stmt 0 view .LVU71
- 252 0020 6168     		ldr	r1, [r4, #4]
- 253              	.LVL20:
+ 252              		.loc 1 301 3 view .LVU72
+ 253              		.loc 1 301 10 is_stmt 0 view .LVU73
+ 254 0020 6168     		ldr	r1, [r4, #4]
+ 255              	.LVL20:
  302:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   ethhdr->type = eth_type_be;
- 254              		.loc 1 302 3 is_stmt 1 view .LVU72
- 255              		.loc 1 302 16 is_stmt 0 view .LVU73
- 256 0022 A1F80C80 		strh	r8, [r1, #12]	@ unaligned
+ 256              		.loc 1 302 3 is_stmt 1 view .LVU74
+ 257              		.loc 1 302 16 is_stmt 0 view .LVU75
+ 258 0022 A1F80C80 		strh	r8, [r1, #12]	@ unaligned
  303:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   SMEMCPY(&ethhdr->dest, dst, ETH_HWADDR_LEN);
- 257              		.loc 1 303 3 is_stmt 1 view .LVU74
- 258 0026 3B68     		ldr	r3, [r7]	@ unaligned
- 259 0028 0B60     		str	r3, [r1]	@ unaligned
- 260 002a BB88     		ldrh	r3, [r7, #4]	@ unaligned
- 261 002c 8B80     		strh	r3, [r1, #4]	@ unaligned
+ 259              		.loc 1 303 3 is_stmt 1 view .LVU76
+ 260 0026 3B68     		ldr	r3, [r7]	@ unaligned
+ 261 0028 0B60     		str	r3, [r1]	@ unaligned
+ 262 002a BB88     		ldrh	r3, [r7, #4]	@ unaligned
+ 263 002c 8B80     		strh	r3, [r1, #4]	@ unaligned
  304:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   SMEMCPY(&ethhdr->src,  src, ETH_HWADDR_LEN);
- 262              		.loc 1 304 3 view .LVU75
- 263 002e 3368     		ldr	r3, [r6]	@ unaligned
- 264 0030 C1F80630 		str	r3, [r1, #6]	@ unaligned
- 265 0034 B388     		ldrh	r3, [r6, #4]	@ unaligned
- 266 0036 4B81     		strh	r3, [r1, #10]	@ unaligned
+ 264              		.loc 1 304 3 view .LVU77
+ 265 002e 3368     		ldr	r3, [r6]	@ unaligned
+ 266 0030 C1F80630 		str	r3, [r1, #6]	@ unaligned
+ 267 0034 B388     		ldrh	r3, [r6, #4]	@ unaligned
+ 268 0036 4B81     		strh	r3, [r1, #10]	@ unaligned
  305:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** 
  306:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   LWIP_ASSERT("netif->hwaddr_len must be 6 for ethernet_output!",
- 267              		.loc 1 306 3 view .LVU76
- 268              		.loc 1 306 3 view .LVU77
- 269 0038 95F82C30 		ldrb	r3, [r5, #44]	@ zero_extendqisi2
- 270 003c 062B     		cmp	r3, #6
- 271 003e 05D1     		bne	.L18
- 272              	.LVL21:
- 273              	.L15:
- 274              		.loc 1 306 3 discriminator 3 view .LVU78
- 275              		.loc 1 306 3 discriminator 3 view .LVU79
+ 269              		.loc 1 306 3 view .LVU78
+ 270              		.loc 1 306 3 view .LVU79
+ 271 0038 95F82C30 		ldrb	r3, [r5, #44]	@ zero_extendqisi2
+ 272 003c 062B     		cmp	r3, #6
+ 273 003e 05D1     		bne	.L18
+ 274              	.LVL21:
+ 275              	.L15:
+ 276              		.loc 1 306 3 discriminator 3 view .LVU80
+ 277              		.loc 1 306 3 discriminator 3 view .LVU81
  307:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****               (netif->hwaddr_len == ETH_HWADDR_LEN));
  308:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE,
  309:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****               ("ethernet_output: sending packet %p\n", (void *)p));
- 276              		.loc 1 309 67 discriminator 3 view .LVU80
+ 278              		.loc 1 309 67 discriminator 3 view .LVU82
  310:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** 
  311:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   /* send the packet */
  312:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   return netif->linkoutput(netif, p);
- 277              		.loc 1 312 3 discriminator 3 view .LVU81
- 278              		.loc 1 312 15 is_stmt 0 discriminator 3 view .LVU82
- 279 0040 AB69     		ldr	r3, [r5, #24]
- 280              		.loc 1 312 10 discriminator 3 view .LVU83
- 281 0042 2146     		mov	r1, r4
- 282 0044 2846     		mov	r0, r5
-ARM GAS  /tmp/cc1624hb.s 			page 12
+ 279              		.loc 1 312 3 discriminator 3 view .LVU83
+ 280              		.loc 1 312 15 is_stmt 0 discriminator 3 view .LVU84
+ 281 0040 AB69     		ldr	r3, [r5, #24]
+ARM GAS  /tmp/ccvN8gmG.s 			page 12
 
 
- 283 0046 9847     		blx	r3
- 284              	.LVL22:
- 285              	.L14:
- 286              	.LDL1:
+ 282              		.loc 1 312 10 discriminator 3 view .LVU85
+ 283 0042 2146     		mov	r1, r4
+ 284 0044 2846     		mov	r0, r5
+ 285 0046 9847     		blx	r3
+ 286              	.LVL22:
+ 287              	.L14:
+ 288              	.LDL1:
  313:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** 
  314:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** pbuf_header_failed:
  315:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_LEVEL_SERIOUS,
@@ -672,89 +675,88 @@ ARM GAS  /tmp/cc1624hb.s 			page 1
  317:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   LINK_STATS_INC(link.lenerr);
  318:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****   return ERR_BUF;
  319:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** }
- 287              		.loc 1 319 1 view .LVU84
- 288 0048 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
- 289              	.LVL23:
- 290              	.L18:
+ 289              		.loc 1 319 1 view .LVU86
+ 290 0048 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 291              	.LVL23:
+ 292              	.L18:
  306:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****               (netif->hwaddr_len == ETH_HWADDR_LEN));
- 291              		.loc 1 306 3 is_stmt 1 discriminator 1 view .LVU85
+ 293              		.loc 1 306 3 is_stmt 1 discriminator 1 view .LVU87
  306:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****               (netif->hwaddr_len == ETH_HWADDR_LEN));
- 292              		.loc 1 306 3 discriminator 1 view .LVU86
- 293 004c 054B     		ldr	r3, .L19
- 294 004e 4FF49972 		mov	r2, #306
- 295 0052 0549     		ldr	r1, .L19+4
- 296              	.LVL24:
+ 294              		.loc 1 306 3 discriminator 1 view .LVU88
+ 295 004c 054B     		ldr	r3, .L19
+ 296 004e 4FF49972 		mov	r2, #306
+ 297 0052 0549     		ldr	r1, .L19+4
+ 298              	.LVL24:
  306:Middlewares/Third_Party/LwIP/src/netif/ethernet.c ****               (netif->hwaddr_len == ETH_HWADDR_LEN));
- 297              		.loc 1 306 3 is_stmt 0 discriminator 1 view .LVU87
- 298 0054 0548     		ldr	r0, .L19+8
- 299 0056 FFF7FEFF 		bl	printf
- 300              	.LVL25:
- 301 005a F1E7     		b	.L15
- 302              	.L16:
+ 299              		.loc 1 306 3 is_stmt 0 discriminator 1 view .LVU89
+ 300 0054 0548     		ldr	r0, .L19+8
+ 301 0056 FFF7FEFF 		bl	printf
+ 302              	.LVL25:
+ 303 005a F1E7     		b	.L15
+ 304              	.LVL26:
+ 305              	.L16:
  318:Middlewares/Third_Party/LwIP/src/netif/ethernet.c **** }
- 303              		.loc 1 318 10 view .LVU88
- 304 005c 6FF00100 		mvn	r0, #1
- 305 0060 F2E7     		b	.L14
- 306              	.L20:
- 307 0062 00BF     		.align	2
- 308              	.L19:
- 309 0064 00000000 		.word	.LC0
- 310 0068 34000000 		.word	.LC1
- 311 006c 68000000 		.word	.LC2
- 312              		.cfi_endproc
- 313              	.LFE168:
- 315              		.global	ethzero
- 316              		.global	ethbroadcast
- 317              		.section	.rodata.ethbroadcast,"a"
- 318              		.align	2
- 319              		.set	.LANCHOR0,. + 0
- 322              	ethbroadcast:
- 323 0000 FFFFFFFF 		.ascii	"\377\377\377\377\377\377"
- 323      FFFF
- 324              		.section	.rodata.ethzero,"a"
- 325              		.align	2
- 328              	ethzero:
- 329 0000 00000000 		.space	6
- 329      0000
- 330              		.text
- 331              	.Letext0:
-ARM GAS  /tmp/cc1624hb.s 			page 13
+ 306              		.loc 1 318 10 view .LVU90
+ 307 005c 6FF00100 		mvn	r0, #1
+ 308 0060 F2E7     		b	.L14
+ 309              	.L20:
+ 310 0062 00BF     		.align	2
+ 311              	.L19:
+ 312 0064 00000000 		.word	.LC0
+ 313 0068 34000000 		.word	.LC1
+ 314 006c 68000000 		.word	.LC2
+ 315              		.cfi_endproc
+ 316              	.LFE167:
+ 318              		.global	ethzero
+ 319              		.section	.rodata.ethzero,"a"
+ 320              		.align	2
+ 323              	ethzero:
+ 324 0000 00000000 		.space	6
+ 324      0000
+ 325              		.global	ethbroadcast
+ 326              		.section	.rodata.ethbroadcast,"a"
+ 327              		.align	2
+ 330              	ethbroadcast:
+ 331 0000 FFFFFFFF 		.ascii	"\377\377\377\377\377\377"
+ARM GAS  /tmp/ccvN8gmG.s 			page 13
 
 
- 332              		.file 2 "/home/lobanov/st/stm32cubeclt_1.12.1/GNU-tools-for-STM32/arm-none-eabi/include/machine/_d
- 333              		.file 3 "/home/lobanov/st/stm32cubeclt_1.12.1/GNU-tools-for-STM32/arm-none-eabi/include/sys/_stdin
- 334              		.file 4 "/home/lobanov/st/stm32cubeclt_1.12.1/GNU-tools-for-STM32/lib/gcc/arm-none-eabi/10.3.1/inc
- 335              		.file 5 "Middlewares/Third_Party/LwIP/src/include/lwip/arch.h"
- 336              		.file 6 "Middlewares/Third_Party/LwIP/src/include/lwip/err.h"
- 337              		.file 7 "Middlewares/Third_Party/LwIP/src/include/lwip/pbuf.h"
- 338              		.file 8 "Middlewares/Third_Party/LwIP/src/include/lwip/ip4_addr.h"
- 339              		.file 9 "Middlewares/Third_Party/LwIP/src/include/lwip/ip_addr.h"
- 340              		.file 10 "Middlewares/Third_Party/LwIP/src/include/lwip/memp.h"
- 341              		.file 11 "Middlewares/Third_Party/LwIP/src/include/lwip/netif.h"
- 342              		.file 12 "Middlewares/Third_Party/LwIP/src/include/lwip/prot/ethernet.h"
- 343              		.file 13 "Middlewares/Third_Party/LwIP/src/include/netif/ethernet.h"
- 344              		.file 14 "/home/lobanov/st/stm32cubeclt_1.12.1/GNU-tools-for-STM32/arm-none-eabi/include/stdio.h"
- 345              		.file 15 "/home/lobanov/st/stm32cubeclt_1.12.1/GNU-tools-for-STM32/arm-none-eabi/include/string.h"
- 346              		.file 16 "Middlewares/Third_Party/LwIP/src/include/lwip/def.h"
- 347              		.file 17 "Middlewares/Third_Party/LwIP/src/include/lwip/ip4.h"
- 348              		.file 18 "Middlewares/Third_Party/LwIP/src/include/lwip/prot/ieee.h"
- 349              		.file 19 "Middlewares/Third_Party/LwIP/src/include/lwip/etharp.h"
-ARM GAS  /tmp/cc1624hb.s 			page 14
+ 331      FFFF
+ 332              		.text
+ 333              	.Letext0:
+ 334              		.file 2 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdint.h"
+ 335              		.file 3 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stddef.h"
+ 336              		.file 4 "Middlewares/Third_Party/LwIP/src/include/lwip/arch.h"
+ 337              		.file 5 "Middlewares/Third_Party/LwIP/src/include/lwip/err.h"
+ 338              		.file 6 "Middlewares/Third_Party/LwIP/src/include/lwip/pbuf.h"
+ 339              		.file 7 "Middlewares/Third_Party/LwIP/src/include/lwip/ip4_addr.h"
+ 340              		.file 8 "Middlewares/Third_Party/LwIP/src/include/lwip/ip_addr.h"
+ 341              		.file 9 "Middlewares/Third_Party/LwIP/src/include/lwip/memp.h"
+ 342              		.file 10 "Middlewares/Third_Party/LwIP/src/include/lwip/netif.h"
+ 343              		.file 11 "Middlewares/Third_Party/LwIP/src/include/lwip/prot/ethernet.h"
+ 344              		.file 12 "Middlewares/Third_Party/LwIP/src/include/netif/ethernet.h"
+ 345              		.file 13 "/usr/include/newlib/stdio.h"
+ 346              		.file 14 "/usr/include/newlib/string.h"
+ 347              		.file 15 "Middlewares/Third_Party/LwIP/src/include/lwip/def.h"
+ 348              		.file 16 "Middlewares/Third_Party/LwIP/src/include/lwip/ip4.h"
+ 349              		.file 17 "Middlewares/Third_Party/LwIP/src/include/lwip/prot/ieee.h"
+ 350              		.file 18 "Middlewares/Third_Party/LwIP/src/include/lwip/etharp.h"
+ARM GAS  /tmp/ccvN8gmG.s 			page 14
 
 
 DEFINED SYMBOLS
-                            *ABS*:0000000000000000 ethernet.c
-     /tmp/cc1624hb.s:19     .text.ethernet_input:0000000000000000 $t
-     /tmp/cc1624hb.s:25     .text.ethernet_input:0000000000000000 ethernet_input
-     /tmp/cc1624hb.s:188    .text.ethernet_input:00000000000000a4 $d
-     /tmp/cc1624hb.s:193    .rodata.ethernet_output.str1.4:0000000000000000 $d
-     /tmp/cc1624hb.s:203    .text.ethernet_output:0000000000000000 $t
-     /tmp/cc1624hb.s:209    .text.ethernet_output:0000000000000000 ethernet_output
-     /tmp/cc1624hb.s:309    .text.ethernet_output:0000000000000064 $d
-     /tmp/cc1624hb.s:328    .rodata.ethzero:0000000000000000 ethzero
-     /tmp/cc1624hb.s:322    .rodata.ethbroadcast:0000000000000000 ethbroadcast
-     /tmp/cc1624hb.s:318    .rodata.ethbroadcast:0000000000000000 $d
-     /tmp/cc1624hb.s:325    .rodata.ethzero:0000000000000000 $d
+                            *ABS*:00000000 ethernet.c
+     /tmp/ccvN8gmG.s:20     .text.ethernet_input:00000000 $t
+     /tmp/ccvN8gmG.s:26     .text.ethernet_input:00000000 ethernet_input
+     /tmp/ccvN8gmG.s:190    .text.ethernet_input:000000a4 $d
+     /tmp/ccvN8gmG.s:330    .rodata.ethbroadcast:00000000 ethbroadcast
+     /tmp/ccvN8gmG.s:195    .rodata.ethernet_output.str1.4:00000000 $d
+     /tmp/ccvN8gmG.s:205    .text.ethernet_output:00000000 $t
+     /tmp/ccvN8gmG.s:211    .text.ethernet_output:00000000 ethernet_output
+     /tmp/ccvN8gmG.s:312    .text.ethernet_output:00000064 $d
+     /tmp/ccvN8gmG.s:323    .rodata.ethzero:00000000 ethzero
+     /tmp/ccvN8gmG.s:320    .rodata.ethzero:00000000 $d
+     /tmp/ccvN8gmG.s:327    .rodata.ethbroadcast:00000000 $d
 
 UNDEFINED SYMBOLS
 memcmp

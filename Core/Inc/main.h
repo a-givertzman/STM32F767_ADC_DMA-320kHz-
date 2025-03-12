@@ -58,6 +58,18 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define Gain_A11_Pin GPIO_PIN_7
+#define Gain_A11_GPIO_Port GPIOE
+#define Gain_A01_Pin GPIO_PIN_8
+#define Gain_A01_GPIO_Port GPIOE
+#define Sensor1_OK_Pin GPIO_PIN_9
+#define Sensor1_OK_GPIO_Port GPIOE
+#define Sensor2_OK_Pin GPIO_PIN_11
+#define Sensor2_OK_GPIO_Port GPIOE
+#define Gain_A02_Pin GPIO_PIN_12
+#define Gain_A02_GPIO_Port GPIOE
+#define Gain_A12_Pin GPIO_PIN_13
+#define Gain_A12_GPIO_Port GPIOE
 
 /* USER CODE BEGIN Private defines */
 

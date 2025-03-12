@@ -402,16 +402,17 @@ int main(void)
   MX_DMA_Init();
   MX_ADC1_Init();
   MX_TIM1_Init();
+  MX_ADC2_Init();
   MX_LWIP_Init();
   /* USER CODE BEGIN 2 */
   // testLeds(2);
-  udpClientConnect();
-  txBufPrepare();
-  testLeds(1);
-  HAL_Delay(64);
-  HAL_TIM_Base_Start_IT(&htim1);
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
-  APP_ERROR_CODE = INFO3_BLUE_GREEN;
+  // udpClientConnect();
+  // txBufPrepare();
+  // testLeds(1);
+  // HAL_Delay(64);
+  // HAL_TIM_Base_Start_IT(&htim1);
+  // HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&adc_buf, ADC_BUF_LEN);
+  // APP_ERROR_CODE = INFO3_BLUE_GREEN;
   // for (uint16_t i = 0; i < ADC_BUF_LEN; i++) {
   //     adc_buf_test[i] = i;
   // }  
@@ -421,45 +422,45 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1) {
 //	  HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_14); //LED_RED
-    if (APP_ERROR_CODE > 0) {
-      handleError();
-    }
-    if (connect) {
-      if (!isConnected) {
-        HAL_Delay(64);
-        // testLeds(2);
-        errorLeds(INFO3_BLUE_GREEN);
-        errorLeds(INFO3_BLUE_GREEN);
-        errorLeds(INFO3_BLUE_GREEN);
-        txBufClear();
-        err_t err = txBufPrepare();
-        if (err == ERR_OK) {
-          HAL_Delay(64);
-          // udp_disconnect(upcb);
-          // upcb->remote_ip != NULL
-          err_t err = udp_connect(upcb, &remoteAddr, remotePort);
-          if (err == ERR_OK) {
-            // APP_ERROR_CODE = INFO2_GREEN;
-            errorLeds(INFO2_GREEN);
-            connect = false;
-            isConnected = true;
-          } else {
-            errorLeds(WARNING_RED_BLUE);
-            // APP_ERROR_CODE = WARNING_RED_GREEN;
-          }
-        } else {
-          errorLeds(WARNING_RED_GREEN);
-          // APP_ERROR_CODE = WARNING_RED_BLUE;
-        }
-        connectCount--;
-        if (connectCount < 1) {
-          connectCount = 3;
-          connect = false;
-        }
-      }
-    }
-	  ethernetif_input(&gnetif);
-	  sys_check_timeouts();
+    // if (APP_ERROR_CODE > 0) {
+    //   handleError();
+    // }
+    // if (connect) {
+    //   if (!isConnected) {
+    //     HAL_Delay(64);
+    //     // testLeds(2);
+    //     errorLeds(INFO3_BLUE_GREEN);
+    //     errorLeds(INFO3_BLUE_GREEN);
+    //     errorLeds(INFO3_BLUE_GREEN);
+    //     txBufClear();
+    //     err_t err = txBufPrepare();
+    //     if (err == ERR_OK) {
+    //       HAL_Delay(64);
+    //       // udp_disconnect(upcb);
+    //       // upcb->remote_ip != NULL
+    //       err_t err = udp_connect(upcb, &remoteAddr, remotePort);
+    //       if (err == ERR_OK) {
+    //         // APP_ERROR_CODE = INFO2_GREEN;
+    //         errorLeds(INFO2_GREEN);
+    //         connect = false;
+    //         isConnected = true;
+    //       } else {
+    //         errorLeds(WARNING_RED_BLUE);
+    //         // APP_ERROR_CODE = WARNING_RED_GREEN;
+    //       }
+    //     } else {
+    //       errorLeds(WARNING_RED_GREEN);
+    //       // APP_ERROR_CODE = WARNING_RED_BLUE;
+    //     }
+    //     connectCount--;
+    //     if (connectCount < 1) {
+    //       connectCount = 3;
+    //       connect = false;
+    //     }
+    //   }
+    // }
+	  // ethernetif_input(&gnetif);
+	  // sys_check_timeouts();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -479,7 +480,7 @@ void SystemClock_Config(void)
   /** Configure the main internal regulator output voltage
   */
   __HAL_RCC_PWR_CLK_ENABLE();
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
@@ -488,19 +489,12 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 25;
-  RCC_OscInitStruct.PLL.PLLN = 432;
+  RCC_OscInitStruct.PLL.PLLM = 4;
+  RCC_OscInitStruct.PLL.PLLN = 100;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 2;
   RCC_OscInitStruct.PLL.PLLR = 2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Activate the Over-Drive mode
-  */
-  if (HAL_PWREx_EnableOverDrive() != HAL_OK)
   {
     Error_Handler();
   }
@@ -510,11 +504,11 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV2;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_7) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
   {
     Error_Handler();
   }
